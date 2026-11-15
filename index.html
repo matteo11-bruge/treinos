@@ -523,7 +523,7 @@ function ensureEntry(d){
 }
 function pruneEntry(d){
   const e = D.days[d]; if (!e) return;
-  if (e.slots.some(s => s.status) || (e.summary||'').trim() || (e.note||'').trim()) return;
+  if (e.slots.some(s => s.status) || (e.summary||'').trim() || (e.note||'').trim() || (e.audios||[]).length) return;
   delete D.days[d];
   const plan = rawSlots(d);
   const same = plan.length === e.slots.length && plan.every((p,i) => p.mod === e.slots[i].mod && !!p.opt === !!e.slots[i].opt);
@@ -753,7 +753,10 @@ function renderSheet(){
     <div class="sheet-h"><div style="flex:1"><h2>${fmtDL(d)}</h2>${d > T ? '<p class="muted small">dia futuro</p>' : d < T ? '<p class="muted small">dia passado</p>' : '<p class="muted small">hoje</p>'}</div><button class="close" data-action="close-sheet" aria-label="Fechar">✕</button></div>
     ${tagsFor(d)}${slotsBlock(d, T, true)}
     <div style="margin-top:14px"><span class="lbl" style="margin-bottom:6px">Adicionar treino</span><div class="chips">${Object.keys(MODS).map(m => `<button class="chip" data-action="add-slot" data-date="${d}" data-mod="${m}">+ ${MODS[m].label}</button>`).join('')}</div></div>
-    <div class="field"><div class="field-h"><span>Resumo do dia</span>${IOS ? `<button class="btn sm" data-action="rec" data-date="${d}"><i class="rec-dot"></i>Gravar por voz</button>` : ''}</div><textarea id="sumIn" data-date="${d}" rows="${rowsFor(e?.summary)}" placeholder="O que foi treinado? Técnicas, ajustes, detalhes…">${esc(e?.summary || '')}</textarea>${IOS ? '' : '<p class="note">No iPhone aparece aqui o botão Gravar por voz: você fala e o texto volta organizado.</p>'}</div>
+    <div class="field"><div class="field-h"><span>Técnicas da semana</span>${IOS ? `<button class="btn sm" data-action="rec" data-date="${d}"><i class="rec-dot"></i>Gravar por voz</button>` : ''}</div>
+      <p class="note" style="margin-top:0">${IOS ? 'Fale o que aprendeu. O Claude organiza e junta com o que já está na semana, na aba Técnicas.' : 'No iPhone aparece aqui o botão Gravar por voz.'} <button class="link" style="font-size:13.5px" data-action="goto-tec" data-date="${d}">Abrir a semana</button></p></div>
+    ${(e?.audios || []).length ? `<details class="field"><summary class="lbl" style="cursor:pointer">Gravações deste dia (${e.audios.length}) · fala original</summary>${e.audios.map((a,k) => `<div class="note-i"><div class="d"><span>${esc(a.hora || '')}</span><button class="link" style="font-size:13px" data-action="aud-del" data-date="${d}" data-i="${k}">remover</button></div><div class="pre small">${esc(a.texto)}</div></div>`).join('')}</details>` : ''}
+    <label class="field"><span>Observações do dia</span><textarea id="sumIn" data-date="${d}" rows="${rowsFor(e?.summary)}" placeholder="Algo específico deste dia (opcional)">${esc(e?.summary || '')}</textarea></label>
     <div class="actions">${has ? `<button class="btn sm" data-action="close-day" data-date="${d}">Sem treino neste dia</button>` : ''}${e ? `<button class="btn sm" data-action="reset-day" data-date="${d}">Voltar à grade padrão</button>` : ''}</div>
   </div></div>`;
   if (prevFocus === 'sumIn') document.getElementById('sumIn')?.focus();
@@ -866,11 +869,12 @@ function viewTec(T){
   monthWeeks(m).forEach((w, i) => {
     const key = 'sem:' + w.start, id = 'w:' + w.start;
     const open = UI.open === id || (UI.open == null && cur && cur.start === w.start);
-    const sums = w.days.filter(d => (D.days[d]?.summary || '').trim());
+    const sums = w.days.filter(d => (D.days[d]?.summary || '').trim() || (D.days[d]?.audios || []).length);
     h += `<details class="cfg" data-sec="${id}" ${open ? 'open' : ''}><summary>Semana ${i+1}<span class="s">${fmtS(w.days[0])} – ${fmtS(w.days[w.days.length-1])}${D.tec[key] ? ' · preenchida' : ''}</span></summary><div class="in">
       ${TEC_F.map(([mod,label,fs]) => `<div class="tec-mod"><div class="tec-h"><span class="dot ${mod}"></span>${label}</div>${fs.map(([f,l]) => `<label class="field"><span>${l}</span>${ta(key, mod + '.' + f, 'Técnica e passo a passo…')}</label>`).join('')}</div>`).join('')}
       <div class="tec-mod"><div class="tec-h">Ajustes e detalhes</div><label class="field"><span>O que faz a técnica funcionar</span>${ta(key, 'detalhes', 'Pegadas, erros comuns, correções do sensei…')}</label></div>
-      <div class="tec-mod"><div class="tec-h">Resumos dos seus dias</div>${sums.length ? sums.map(d => `<div class="row"><button class="rowbtn" data-action="open-day" data-date="${d}"><span class="t">${fmtD(d)}</span><br><span class="d pre clamp">${esc(D.days[d].summary)}</span></button></div>`).join('') : '<p class="note">Os resumos que você escrever ou gravar nos dias desta semana aparecem aqui.</p>'}</div>
+      ${IOS ? `<div class="actions"><button class="btn sm dark" data-action="rec" data-date="${w.days.includes(T) ? T : w.days[0]}"><i class="rec-dot"></i>Gravar por voz nesta semana</button></div>` : ''}
+      <div class="tec-mod"><div class="tec-h">Falas e observações dos dias</div>${sums.length ? sums.map(d => { const e = D.days[d], txt = [(e.summary || '').trim(), ...(e.audios || []).map(a => 'Fala: ' + a.texto)].filter(Boolean).join('\n'); return `<div class="row"><button class="rowbtn" data-action="open-day" data-date="${d}"><span class="t">${fmtD(d)}</span><br><span class="d pre clamp">${esc(txt)}</span></button></div>`; }).join('') : '<p class="note">As falas gravadas e as observações dos dias desta semana aparecem aqui, como registro.</p>'}</div>
     </div></details>`;
   });
   return h + '</div>';
@@ -984,7 +988,9 @@ document.addEventListener('click', ev => {
     case 'tec-copy': navigator.clipboard?.writeText(monthText(UI.tmonth)).then(() => toast('Mês copiado'), () => toast('Não consegui copiar')); break;
     case 'reason-text': { const inp = el.closest('.reason').querySelector('.reason-in'), r = inp.value.trim(); if (!r){ inp.focus(); break; }
       const s = ensureEntry(d).slots[i]; s.status = 'justified'; s.reason = r; UI.justify = null; commitDay(d); break; }
-    case 'rec': saveSummary(); runShortcut('Resumo do treino', d); break;
+    case 'rec': saveSummary(); runShortcut('Técnicas da semana', d); break;
+    case 'goto-tec': saveSummary(); UI.sheet = null; UI.tab = 'tec'; UI.tmonth = pd(d).getMonth(); UI.open = 'w:' + weekOf(d).start; scrollTo(0,0); render(); break;
+    case 'aud-del': if (confirm('Remover esta gravação? (A semana na aba Técnicas não muda.)')){ const e = ensureEntry(d); e.audios.splice(i, 1); if (!e.audios.length) delete e.audios; commitDay(d); } break;
     case 'est-filter': UI.estF = el.dataset.v; render(); break;
     case 'est-add': { const t = val('estNew'); if (!t){ document.getElementById('estNew')?.focus(); break; }
       const id = uid(); D.studies[id] = { titulo:t, status:'estudando', links:[], notas:[], criado:todayStr() }; saveStudy(id); UI.study = id; UI.play = null; UI.noteDraft = ''; render(); break; }
