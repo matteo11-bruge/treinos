@@ -244,6 +244,52 @@ details.cfg .in{padding:0 18px 18px}
 .toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14.5px;z-index:80;max-width:88vw;text-align:center}
 @media (min-width:760px){.toast{bottom:28px}}
 .vh{position:absolute;left:-9999px}
+
+/* --- v2 --- */
+nav.tabs .wrap{grid-template-columns:repeat(5,1fr);padding:6px 4px}
+nav.tabs button{font-size:11px}
+@media (min-width:760px){nav.tabs .wrap{padding:0 18px 8px}nav.tabs button{font-size:14px}}
+textarea,input[type=text],input[type=number],input[type=date],input[type=url],select{-webkit-appearance:none;appearance:none;width:100%;max-width:100%;min-width:0;min-height:44px;background:var(--fill);border:1px solid transparent;border-radius:11px;padding:10px 12px;font-size:16px;line-height:1.3;margin:0}
+textarea{field-sizing:content;line-height:1.45;min-height:64px}
+input[type=date]{display:block;text-align:left;-webkit-min-logical-width:0}
+input[type=date]::-webkit-date-and-time-value{text-align:left;margin:0}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%238a8882' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px}
+.lbl input,.lbl select,.lbl textarea{margin-top:5px}
+.form .btn.full,.btn.block{justify-content:center;min-height:44px;background:var(--ink);color:var(--surface)}
+.cfg-group{background:var(--surface);border-radius:var(--r);margin-top:12px;overflow:hidden}
+.cfg-group details.cfg{background:none;border-radius:0;margin:0;border-top:1px solid var(--line)}
+.cfg-group details.cfg:first-child{border-top:0}
+.other{display:flex;gap:8px;margin-top:8px;align-items:stretch}.other input{flex:1}.other .btn{flex:none}
+.field-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.field-h span{font-size:13px;font-weight:600;color:var(--ink-2)}
+.rec-dot{width:9px;height:9px;border-radius:50%;background:var(--crit);display:inline-block}
+.tipbox{margin-top:12px;background:var(--accent-track);border-radius:12px;padding:10px 12px;font-size:14.5px;font-weight:550}
+.cal .d.off{background:var(--fill-2);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.cal .d.off .n{color:var(--muted);text-decoration:line-through}
+.offm{font-size:9px;font-weight:700;color:var(--ink-2);font-style:normal;line-height:1.05;text-align:center;text-transform:uppercase;letter-spacing:.02em}
+.wk button.off{background:var(--fill-2);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.wk button.off .n{color:var(--muted);text-decoration:line-through}
+.tag.off{background:var(--fill-2);color:var(--ink)}
+.sw.off{background:var(--fill-2);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.tec-mod{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.tec-mod:first-child{border-top:0;margin-top:0;padding-top:0}
+.tec-h{display:flex;align-items:center;gap:8px;font-weight:650;font-size:15px}
+.tec-mod .field{margin-top:10px}
+.pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.yt{position:relative;padding-top:56.25%;margin:2px 0 10px;border-radius:12px;overflow:hidden;background:#000}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lk{color:var(--accent);text-decoration:none;overflow-wrap:anywhere}
+.xbtn{border:0;background:none;color:var(--muted);font-size:20px;line-height:1;padding:4px 6px}
+.note-i{padding:10px 0;border-top:1px solid var(--line)}
+.note-i .d{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:3px}
+.tag.st-treinando{background:var(--away);color:var(--warn-t)}
+.tag.st-funcionando{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--good-t)}
+.sub-h{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin:16px 0 6px}
+#estTitle{font-weight:650;font-size:18px}
+.form,.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.form > *,.grid2 > *{min-width:0}
+.lbl{min-width:0}
 </style>
 </head>
 <body>
@@ -267,7 +313,9 @@ const LS = {
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
   del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
-const K = { code:'treinos-codigo', cache:'treinos-cache', queue:'treinos-fila', theme:'treinos-tema', demo:'treinos-demo' };
+const K = { code:'treinos-codigo', cache:'treinos-cache', queue:'treinos-fila', theme:'treinos-tema', demo:'treinos-demo2' };
+const QS = new URLSearchParams(location.search);
+const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || QS.get('ios') === '1';
 
 /* ================= Datas ================= */
 const pad = n => String(n).padStart(2,'0');
@@ -330,7 +378,7 @@ function holidaysFor(y){
 /* ================= Comunicação com o Supabase ================= */
 let code = LS.get(K.code, null);
 let D = null;              // estado em memória
-const UI = { tab:'resumo', month:null, sheet:null, justify:null, showAllPend:false, loaded:false };
+const UI = { tab:'resumo', month:null, tmonth:null, sheet:null, study:null, justify:null, showAllPend:false, loaded:false, mais:'num', estF:'todos', play:null, noteDraft:'' };
 
 async function rpc(fn, args = {}){
   if (DEMO) return demoRpc(fn, args);
@@ -344,7 +392,7 @@ async function rpc(fn, args = {}){
 function fromServer(j){
   return { me: { ...j.atleta, metas: { ...DEF_METAS, ...(j.atleta.metas||{}) }, grade: j.atleta.grade || defaultGrade(), afastamentos: j.atleta.afastamentos || [] },
            athletes: j.atletas || [], days: j.dias || {}, year: +j.ano || 2027,
-           holidays: j.feriados || [], recess: j.recessos || [], events: j.eventos || [] };
+           holidays: j.feriados || [], recess: j.recessos || [], events: j.eventos || [], tec: j.tecnicas || {}, studies: j.estudos || {} };
 }
 const queue = () => LS.get(K.queue, []);
 function cacheState(){ LS.set(K.cache, { code, D }); }
@@ -408,6 +456,13 @@ function demoSeed(){
     athletes:[{id:'leonardo',nome:'Leonardo'},{id:'matteo',nome:'Matteo'}], days:{}, year:2027, holidays,
     recess:[{ id:uid(), from:'2027-12-20', to:'2027-12-31', label:'Férias da academia' }],
     events:[{ id:uid(), date:'2027-03-27', title:'Apresentação ao sensei', type:'apresentacao', athlete:null }, { id:uid(), date:'2027-04-17', title:'Copa São Paulo', type:'campeonato', athlete:'matteo' }] };
+  st.tec = { 'mes:2027-03': { tema:'Pegada de costas', obs:'Prioridade do mês: manter o controle antes de atacar.' },
+    'sem:2027-03-01': { gi:{ pe:'Arm drag para as costas', chao:'Pegada de costas saindo da tartaruga' }, nogi:{ pe:'Duck under', chao:'Seat belt + ganchos' }, wrestling:{ tec:'Single leg com finalização por trás' }, detalhes:'Peito colado nas costas o tempo todo. Não cruzar os pés.' },
+    'sem:2027-03-08': { gi:{ pe:'Queda de costas a partir do russian tie', chao:'Arco e flecha' }, nogi:{ chao:'Mata-leão: troca de mão quando defendem o queixo' } } };
+  st.studies = { e1:{ titulo:'Meia-guarda: raspagem com underhook', mod:'gi', tipo:'chao', status:'treinando', criado:'2027-02-20', mexido:'2027-03-08T12:00:00Z',
+      links:[{ url:'https://www.youtube.com/watch?v=aqz-KE-bpKQ', titulo:'Vídeo de referência' }],
+      notas:[{ id:'n1', data:'2027-02-20', texto:'Entrar com o underhook antes de o oponente achatar.' }, { id:'n2', data:'2027-03-08', texto:'Funcionou duas vezes no rola. Erro: soltei a perna cedo demais.' }] },
+    e2:{ titulo:'Defesa de single leg', mod:'wrestling', tipo:'pe', status:'estudando', criado:'2027-03-02', mexido:'2027-03-02T12:00:00Z', links:[], notas:[] } };
   const T = todayStr(); const sums = ['Passagem toreando e leg drag', 'Raspagem da meia-guarda', 'Single leg e sprawl', 'Ataques das costas: mata-leão e arco e flecha', 'Defesa de chave de pé'];
   for (let d = new Date(2027,0,1); ds(d) < T; d = addDays(d,1)){
     const k = ds(d); if (holidays.some(h => h.date === k && h.closed)) continue;
@@ -424,15 +479,18 @@ function demoSeed(){
 }
 function demoRpc(fn, a){
   let st = LS.get(K.demo, null); if (!st){ st = demoSeed(); LS.set(K.demo, st); }
+  st.tec ??= {}; st.studies ??= {};
   const back = { holidays:'feriados', recess:'recessos', events:'eventos', year:'ano' };
   const keyOf = c => Object.keys(back).find(k => back[k] === c);
   switch (fn){
-    case 'app_carregar': return Promise.resolve({ atleta: st.me, atletas: st.athletes, dias: st.days, ano: st.year, feriados: st.holidays, recessos: st.recess, eventos: st.events });
+    case 'app_carregar': return Promise.resolve({ atleta: st.me, atletas: st.athletes, dias: st.days, ano: st.year, feriados: st.holidays, recessos: st.recess, eventos: st.events, tecnicas: st.tec, estudos: st.studies });
+    case 'app_salvar_tecnica': if (a.p_valor) st.tec[a.p_chave] = a.p_valor; else delete st.tec[a.p_chave]; break;
+    case 'app_salvar_estudo': if (a.p_dados) st.studies[a.p_id] = a.p_dados; else delete st.studies[a.p_id]; break;
     case 'app_salvar_dia': if (a.p_registro) st.days[a.p_data] = a.p_registro; else delete st.days[a.p_data]; break;
     case 'app_salvar_atleta': st.me[a.p_campo] = a.p_valor; break;
     case 'app_salvar_compartilhado': st[keyOf(a.p_chave)] = a.p_valor; break;
     case 'app_importar': { const src = a.p_dados.atletas ? (a.p_dados.atletas[st.me.id] || Object.values(a.p_dados.atletas)[0]) : a.p_dados;
-      if (src){ ['metas','grade','afastamentos'].forEach(k => { if (src[k]) st.me[k] = src[k]; }); if (src.dias) st.days = src.dias; } break; }
+      if (src){ ['metas','grade','afastamentos'].forEach(k => { if (src[k]) st.me[k] = src[k]; }); if (src.dias) st.days = src.dias; if (src.estudos) st.studies = src.estudos; } break; }
   }
   LS.set(K.demo, st); return Promise.resolve({ ok:true });
 }
@@ -457,6 +515,7 @@ function daySlots(d){
   const aw = awayOn(d);
   return rawSlots(d).map(s => (!s.status && aw) ? { ...s, status:'justified', reason: aw.reason || 'Afastamento', auto:true } : { ...s });
 }
+const isOff = d => !!(D.days[d] && D.days[d].slots.length === 0 && !closedReason(d));
 const effStatus = (s, d, T) => s.status || (d < T ? 'missed' : 'pending');
 function ensureEntry(d){
   if (!D.days[d]) D.days[d] = { slots: rawSlots(d).map(s => ({ id:s.id, mod:s.mod, opt:!!s.opt, status:'', reason:'' })), summary:'', note:'' };
@@ -530,18 +589,21 @@ const ICONS = {
   resumo:'<path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/>',
   cal:'<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
   num:'<path d="M5 20v-8M12 20V5M19 20v-5"/>',
-  cfg:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>'
+  tec:'<path d="M5 4.5h10.5a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10.5M9 8.5h6"/>',
+  est:'<rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M10 9.2v5.6l5-2.8z"/>',
+  mais:'<circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/>'
 };
-const TABS = [['resumo','Resumo'],['cal','Calendário'],['num','Números'],['cfg','Ajustes']];
+const TABS = [['resumo','Resumo'],['cal','Calendário'],['tec','Técnicas'],['est','Estudos'],['mais','Mais']];
 
 function render(){
   const v = document.getElementById('view'), tabs = document.getElementById('tabs'), who = document.getElementById('who');
   if (!DEMO && !code){ tabs.hidden = true; who.hidden = true; v.innerHTML = viewLogin(); document.getElementById('sheetRoot').innerHTML = ''; return; }
   if (!D){ tabs.hidden = true; v.innerHTML = UI.loaded ? '' : '<div class="login"><p class="muted">Carregando…</p></div>'; return; }
+  D.tec ??= {}; D.studies ??= {};
   const T = todayStr();
   tabs.hidden = false; who.hidden = false; who.textContent = D.me.nome;
   document.getElementById('tabsIn').innerHTML = TABS.map(([id,l]) => `<button data-action="tab" data-id="${id}" aria-current="${UI.tab === id ? 'page' : 'false'}"><svg viewBox="0 0 24 24">${ICONS[id]}</svg><span>${l}</span></button>`).join('');
-  v.innerHTML = { resumo:viewResumo, cal:viewCal, num:viewNum, cfg:viewCfg }[UI.tab](T);
+  v.innerHTML = ({ resumo:viewResumo, cal:viewCal, tec:viewTec, est:viewEst, mais:viewMais }[UI.tab] || viewResumo)(T);
   renderSheet();
 }
 function renderError(e){
@@ -560,6 +622,7 @@ function tagsFor(d){
   for (const h of holidayOn(d)) t.push(`<span class="tag hol">${esc(h.name)}${h.closed === false ? ' · academia aberta' : ''}</span>`);
   const r = recessOn(d); if (r) t.push(`<span class="tag rec">${esc(r.label || 'Recesso')}</span>`);
   const a = awayOn(d); if (a) t.push(`<span class="tag away">Afastamento · ${esc(a.reason || '')}</span>`);
+  if (isOff(d)) t.push('<span class="tag off">Sem treino · marcado por você</span>');
   for (const e of eventsOn(d)) t.push(`<span class="tag">${esc(EVENT_TYPES[e.type] || 'Evento')} · ${esc(e.title)}</span>`);
   return t.length ? `<div class="tags">${t.join('')}</div>` : '';
 }
@@ -568,20 +631,31 @@ function slotRow(d, s, i, T, removable){
   const btn = (v, l) => `<button data-action="st" data-date="${d}" data-i="${i}" data-v="${v}" class="${s.status === v ? v : ''}" aria-pressed="${s.status === v}">${l}</button>`;
   let h = `<div class="slot ${removable ? 'rm' : ''}"><div class="slot-l"><span class="dot ${s.mod}"></span><span class="slot-n">${MODS[s.mod].label}</span>${s.opt ? '<span class="opt-t">opcional</span>' : ''}${es === 'missed' && !s.opt ? '<span class="miss-t">sem registro</span>' : ''}</div>
     <div class="seg3">${btn('present','Fui')}${btn('absent','Faltei')}${btn('justified','Justificar')}</div>${removable ? `<button class="x" data-action="del-slot" data-date="${d}" data-i="${i}" aria-label="Remover treino">×</button>` : ''}</div>`;
-  if (UI.justify === key) h += `<div class="reason"><div class="chips">${REASONS.map(r => `<button class="chip" data-action="reason" data-date="${d}" data-i="${i}" data-r="${esc(r)}">${r}</button>`).join('')}</div></div>`;
+  if (UI.justify === key) h += `<div class="reason"><div class="chips">${REASONS.filter(r => r !== 'Outro').map(r => `<button class="chip" data-action="reason" data-date="${d}" data-i="${i}" data-r="${esc(r)}">${r}</button>`).join('')}</div><div class="other"><input type="text" class="reason-in" maxlength="80" placeholder="Outro motivo: escreva aqui" aria-label="Outro motivo"><button class="btn" data-action="reason-text" data-date="${d}" data-i="${i}">OK</button></div></div>`;
   else if (s.status === 'justified') h += `<div class="reason">Motivo: ${esc(s.reason || '—')}${s.auto ? ' (afastamento)' : ''} · <button class="link" data-action="re-justify" data-date="${d}" data-i="${i}">trocar</button></div>`;
   return h;
 }
 function slotsBlock(d, T, removable){
   const sl = daySlots(d);
-  if (!sl.length){ const cr = closedReason(d); return `<p class="empty">${cr ? `Sem treino: ${esc(cr.label)}.` : 'Sem treino planejado.'}</p>`; }
+  if (!sl.length){ const cr = closedReason(d); return `<p class="empty">${cr ? `Sem treino: ${esc(cr.label)}.` : isOff(d) ? 'Você marcou este dia como sem treino.' : 'Sem treino planejado.'}</p>`; }
   return sl.map((s,i) => slotRow(d, s, i, T, removable)).join('');
 }
 function weekStrip(w, T){
   const pre = Array(7 - w.days.length).fill('<span></span>').join('');
   const lead = pd(w.days[0]).getDay() === 1 ? '' : pre;
   return `<div class="wk">${lead}${w.days.map(d => { const hol = holidayOn(d).some(h => h.closed !== false);
-    return `<button data-action="open-day" data-date="${d}" class="${d === T ? 'today' : ''} ${hol ? 'hol' : ''}"><span class="l">${DOWI[pd(d).getDay()]}</span><span class="n">${pd(d).getDate()}</span><span class="dots">${daySlots(d).map(s => `<i class="sd ${effStatus(s,d,T)} ${s.opt ? 'opt' : ''} ${s.mod === 'gym' ? 'gym' : ''}"></i>`).join('')}</span></button>`; }).join('')}${lead ? '' : pre}</div>`;
+    return `<button data-action="open-day" data-date="${d}" class="${d === T ? 'today' : ''} ${hol ? 'hol' : ''} ${isOff(d) ? 'off' : ''}"><span class="l">${DOWI[pd(d).getDay()]}</span><span class="n">${pd(d).getDate()}</span><span class="dots">${daySlots(d).map(s => `<i class="sd ${effStatus(s,d,T)} ${s.opt ? 'opt' : ''} ${s.mod === 'gym' ? 'gym' : ''}"></i>`).join('')}</span></button>`; }).join('')}${lead ? '' : pre}</div>`;
+}
+function satTip(w, T){
+  let miss = 0, alvo = null;
+  for (const d of w.days) for (const s of daySlots(d)){
+    if (s.mod === 'gym') continue;
+    const es = effStatus(s, d, T);
+    if (!s.opt && (es === 'absent' || es === 'missed')) miss++;
+    if (!alvo && s.opt && !s.status && d >= T) alvo = { d, mod:s.mod };
+  }
+  if (!miss || !alvo) return '';
+  return `<p class="tipbox">Você perdeu ${plural(miss,'treino','treinos')} nesta semana. Vá ao ${MODS[alvo.mod].label} de ${alvo.d === T ? 'hoje' : DOWL[pd(alvo.d).getDay()].toLowerCase()} para compensar.</p>`;
 }
 function upcoming(T, n){
   const up = [];
@@ -613,7 +687,7 @@ function viewResumo(T){
   h += `<section class="sec"><div class="sec-h"><h3>Semana</h3><span class="muted tiny">${fmtS(w.start)} – ${fmtS(w.end)}</span></div>
     <div class="hero"><span class="big">${st.present}</span><span class="of">de ${fmtN(st.goal)} treinos</span>${st.hit ? '<span class="badge good">✓ meta batida</span>' : ''}</div>
     <p class="sub">${sub}</p>${st.gym.planned ? `<p class="sub" style="margin-top:2px">Musculação: ${st.gym.present} de ${fmtN(st.gym.goal)}</p>` : ''}
-    ${weekStrip(w, T)}</section>`;
+    ${satTip(w, T)}${weekStrip(w, T)}</section>`;
   /* sem registro */
   const pend = pendingDays(T);
   if (pend.length){
@@ -649,8 +723,8 @@ function viewCal(T){
   for (let i = 0; i < lead; i++) cells += '<span class="d out"></span>';
   for (let k = 1; k <= n; k++){
     const d = `${Y()}-${pad(m+1)}-${pad(k)}`; const cr = closedReason(d);
-    const cls = ['d', d === T ? 'today' : '', holidayOn(d).length ? 'hol' : '', cr?.type === 'recess' ? 'rec' : '', awayOn(d) && !cr ? 'away' : '', eventsOn(d).length ? 'ev' : ''].join(' ');
-    cells += `<button class="${cls}" data-action="open-day" data-date="${d}" aria-label="${fmtDL(d)}"><span class="n">${k}</span><span class="dots">${daySlots(d).map(s => `<i class="sd ${effStatus(s,d,T)} ${s.opt ? 'opt' : ''} ${s.mod === 'gym' ? 'gym' : ''}"></i>`).join('')}</span></button>`;
+    const cls = ['d', d === T ? 'today' : '', holidayOn(d).length ? 'hol' : '', cr?.type === 'recess' ? 'rec' : '', awayOn(d) && !cr ? 'away' : '', eventsOn(d).length ? 'ev' : '', isOff(d) ? 'off' : ''].join(' ');
+    cells += `<button class="${cls}" data-action="open-day" data-date="${d}" aria-label="${fmtDL(d)}"><span class="n">${k}</span>${isOff(d) ? '<i class="offm">sem<br>treino</i>' : `<span class="dots">${daySlots(d).map(s => `<i class="sd ${effStatus(s,d,T)} ${s.opt ? 'opt' : ''} ${s.mod === 'gym' ? 'gym' : ''}"></i>`).join('')}</span>`}</button>`;
   }
   const notes = [];
   for (const hh of D.holidays.filter(x => x.date.startsWith(`${Y()}-${pad(m+1)}`))) notes.push({ date:hh.date, t:hh.name, s:hh.closed === false ? 'academia aberta' : 'academia fechada' });
@@ -662,7 +736,7 @@ function viewCal(T){
     <div class="mh"><button data-action="month" data-d="-1" aria-label="Mês anterior">‹</button><h2>${MONTHS[m]}</h2><button data-action="month" data-d="1" aria-label="Próximo mês">›</button></div>
     <p class="msum">${ms.present} de ${ms.planned - ms.justified} treinos${faltas ? ` · ${plural(faltas,'falta','faltas')}` : ''}${ms.justified ? ` · ${plural(ms.justified,'justificada','justificadas')}` : ''}${ms.gym.planned ? ` · musculação ${ms.gym.present}` : ''}</p>
     <div class="cal">${['S','T','Q','Q','S','S','D'].map(x => `<span class="h">${x}</span>`).join('')}${cells}</div>
-    <div class="legend"><span><i class="sd present"></i>fui</span><span><i class="sd missed"></i>faltei / sem registro</span><span><i class="sd justified"></i>justificada</span><span><i class="sd"></i>a fazer</span><span><i class="sd opt"></i>opcional</span><span><i class="sd gym"></i>musculação</span><span><i class="sw" style="background:var(--hol)"></i>feriado</span></div>
+    <div class="legend"><span><i class="sd present"></i>fui</span><span><i class="sd missed"></i>faltei / sem registro</span><span><i class="sd justified"></i>justificada</span><span><i class="sd"></i>a fazer</span><span><i class="sd opt"></i>opcional</span><span><i class="sd gym"></i>musculação</span><span><i class="sw" style="background:var(--hol)"></i>feriado</span><span><i class="sw off"></i>sem treino (marcado por você)</span></div>
   </section>
   ${notes.length ? `<section class="sec"><div class="sec-h"><h3>Neste mês</h3></div>${notes.map(u => `<div class="row"><span class="date-c">${fmtD(u.date)}</span><span class="grow"><span class="t">${esc(u.t)}</span><br><span class="d">${esc(u.s)}</span></span></div>`).join('')}</section>` : ''}`;
 }
@@ -670,6 +744,7 @@ function viewCal(T){
 /* ---------- Folha do dia ---------- */
 function renderSheet(){
   const root = document.getElementById('sheetRoot');
+  if (UI.study && D){ root.innerHTML = studySheet(); return; }
   if (!UI.sheet || !D){ root.innerHTML = ''; return; }
   const T = todayStr(), d = UI.sheet, e = D.days[d], has = daySlots(d).length;
   const prevFocus = document.activeElement?.id;
@@ -678,7 +753,7 @@ function renderSheet(){
     <div class="sheet-h"><div style="flex:1"><h2>${fmtDL(d)}</h2>${d > T ? '<p class="muted small">dia futuro</p>' : d < T ? '<p class="muted small">dia passado</p>' : '<p class="muted small">hoje</p>'}</div><button class="close" data-action="close-sheet" aria-label="Fechar">✕</button></div>
     ${tagsFor(d)}${slotsBlock(d, T, true)}
     <div style="margin-top:14px"><span class="lbl" style="margin-bottom:6px">Adicionar treino</span><div class="chips">${Object.keys(MODS).map(m => `<button class="chip" data-action="add-slot" data-date="${d}" data-mod="${m}">+ ${MODS[m].label}</button>`).join('')}</div></div>
-    <label class="field"><span>Resumo do dia (opcional)</span><textarea id="sumIn" data-date="${d}" placeholder="O que foi treinado?">${esc(e?.summary || '')}</textarea></label>
+    <div class="field"><div class="field-h"><span>Resumo do dia</span>${IOS ? `<button class="btn sm" data-action="rec" data-date="${d}"><i class="rec-dot"></i>Gravar por voz</button>` : ''}</div><textarea id="sumIn" data-date="${d}" rows="${rowsFor(e?.summary)}" placeholder="O que foi treinado? Técnicas, ajustes, detalhes…">${esc(e?.summary || '')}</textarea>${IOS ? '' : '<p class="note">No iPhone aparece aqui o botão Gravar por voz: você fala e o texto volta organizado.</p>'}</div>
     <div class="actions">${has ? `<button class="btn sm" data-action="close-day" data-date="${d}">Sem treino neste dia</button>` : ''}${e ? `<button class="btn sm" data-action="reset-day" data-date="${d}">Voltar à grade padrão</button>` : ''}</div>
   </div></div>`;
   if (prevFocus === 'sumIn') document.getElementById('sumIn')?.focus();
@@ -735,7 +810,7 @@ function viewCfg(T){
   const yHol = D.holidays.filter(h => h.date.startsWith(Y() + '-')).sort((a,b) => a.date < b.date ? -1 : 1);
   const evs = D.events.slice().sort((a,b) => a.date < b.date ? -1 : 1);
   const sec = (id, title, s, body) => `<details class="cfg" data-sec="${id}" ${UI.open === id ? 'open' : ''}><summary>${title}<span class="s">${s}</span></summary><div class="in">${body}</div></details>`;
-  let h = '<div style="height:4px"></div>';
+  let h = '<div class="cfg-group">';
   h += sec('metas', 'Metas', `${fmtN(S.weeklyGoal)}/semana · ${S.yearGoal}/ano`, `<div class="grid2">
       <label class="lbl">Mínimo por semana<input type="number" step="0.5" min="0" inputmode="decimal" data-meta="weeklyGoal" value="${S.weeklyGoal}"></label>
       <label class="lbl">Máximo por semana<input type="number" step="0.5" min="0" inputmode="decimal" data-meta="weeklyMax" value="${S.weeklyMax}"></label>
@@ -765,7 +840,103 @@ function viewCfg(T){
       ${DEMO ? '<p class="note">Modo demonstração: os dados ficam só neste aparelho. Preencha o config.js para usar o Supabase.</p><div class="actions"><button class="btn sm" data-action="demo-reset">Recomeçar a demonstração</button></div>' : `<p class="note">Seu código pessoal (use no atalho do iPhone):</p><div class="code">${esc(code)}</div><div class="actions"><button class="btn sm" data-action="copy-code">Copiar código</button><button class="btn sm danger" data-action="logout-ask">Sair deste aparelho</button></div>`}`);
   h += sec('backup', 'Backup', 'automático toda semana', `<p class="note" style="margin-top:0">O GitHub guarda uma cópia completa toda segunda-feira. Aqui você também pode baixar uma cópia na hora.</p>
       <div class="actions"><button class="btn sm" data-action="export-json">Baixar backup</button><button class="btn sm" data-action="export-csv">Baixar planilha (CSV)</button><label class="btn sm">Restaurar backup<input type="file" accept="application/json,.json" id="importFile" class="vh"></label></div>`);
-  return h;
+  return h + '</div>';
+}
+
+/* ---------- Mais (Números + Ajustes) ---------- */
+function viewMais(T){
+  const v = UI.mais === 'cfg' ? 'cfg' : 'num';
+  return `<div style="padding-top:8px"><div class="seg">${[['num','Números'],['cfg','Ajustes']].map(([k,l]) => `<button data-action="mais" data-v="${k}" aria-pressed="${v === k}">${l}</button>`).join('')}</div></div>` + (v === 'cfg' ? viewCfg(T) : viewNum(T));
+}
+
+/* ---------- Técnicas (mês → semanas) ---------- */
+const TEC_F = [['gi','Gi',[['pe','Em pé (quedas)'],['chao','Chão']]], ['nogi','No-Gi',[['pe','Em pé (quedas)'],['chao','Chão']]], ['wrestling','Wrestling',[['tec','Técnicas']]]];
+const rowsFor = v => Math.max(2, String(v || '').split('\n').length + 1);
+const tecVal = (key, f) => f.split('.').reduce((o,k) => (o || {})[k], D.tec[key]) || '';
+const monthWeeks = m => weeks().filter(w => pd(w.days[0]).getMonth() === m);
+function viewTec(T){
+  if (UI.tmonth == null) UI.tmonth = pd(T).getFullYear() === Y() ? pd(T).getMonth() : 0;
+  const m = UI.tmonth, mk = `mes:${Y()}-${pad(m+1)}`, cur = pd(T).getFullYear() === Y() ? weekOf(T) : null;
+  const ta = (key, f, ph) => `<textarea data-tec="${key}" data-f="${f}" rows="${rowsFor(tecVal(key,f))}" placeholder="${ph}">${esc(tecVal(key,f))}</textarea>`;
+  let h = `<section class="sec"><div class="mh"><button data-action="tmonth" data-d="-1" aria-label="Mês anterior">‹</button><h2>${MONTHS[m]}</h2><button data-action="tmonth" data-d="1" aria-label="Próximo mês">›</button></div>
+    <label class="field" style="margin-top:8px"><span>Tema do mês</span><input type="text" data-tec="${mk}" data-f="tema" value="${esc(tecVal(mk,'tema'))}" placeholder="Ex.: Pegada de costas"></label>
+    <label class="field"><span>Observações do mês</span>${ta(mk, 'obs', 'Conceitos gerais, o que o sensei enfatizou…')}</label>
+    <div class="actions"><button class="btn sm" data-action="tec-copy">Copiar o mês inteiro</button></div>
+    <p class="note">Vale para os dois: o que um escreve aparece para o outro.</p></section><div class="cfg-group">`;
+  monthWeeks(m).forEach((w, i) => {
+    const key = 'sem:' + w.start, id = 'w:' + w.start;
+    const open = UI.open === id || (UI.open == null && cur && cur.start === w.start);
+    const sums = w.days.filter(d => (D.days[d]?.summary || '').trim());
+    h += `<details class="cfg" data-sec="${id}" ${open ? 'open' : ''}><summary>Semana ${i+1}<span class="s">${fmtS(w.days[0])} – ${fmtS(w.days[w.days.length-1])}${D.tec[key] ? ' · preenchida' : ''}</span></summary><div class="in">
+      ${TEC_F.map(([mod,label,fs]) => `<div class="tec-mod"><div class="tec-h"><span class="dot ${mod}"></span>${label}</div>${fs.map(([f,l]) => `<label class="field"><span>${l}</span>${ta(key, mod + '.' + f, 'Técnica e passo a passo…')}</label>`).join('')}</div>`).join('')}
+      <div class="tec-mod"><div class="tec-h">Ajustes e detalhes</div><label class="field"><span>O que faz a técnica funcionar</span>${ta(key, 'detalhes', 'Pegadas, erros comuns, correções do sensei…')}</label></div>
+      <div class="tec-mod"><div class="tec-h">Resumos dos seus dias</div>${sums.length ? sums.map(d => `<div class="row"><button class="rowbtn" data-action="open-day" data-date="${d}"><span class="t">${fmtD(d)}</span><br><span class="d pre clamp">${esc(D.days[d].summary)}</span></button></div>`).join('') : '<p class="note">Os resumos que você escrever ou gravar nos dias desta semana aparecem aqui.</p>'}</div>
+    </div></details>`;
+  });
+  return h + '</div>';
+}
+function saveTec(el){
+  if (!D || !el.isConnected && !el.dataset.tec) return;
+  const key = el.dataset.tec, path = el.dataset.f.split('.'), v = el.value.trim();
+  if (tecVal(key, el.dataset.f) === v) return;
+  const o = D.tec[key] ??= {}; let p = o;
+  path.slice(0, -1).forEach(k => p = (p[k] ??= {}));
+  if (v) p[path[path.length-1]] = v; else delete p[path[path.length-1]];
+  for (const k of Object.keys(o)) if (o[k] && typeof o[k] === 'object' && !Object.keys(o[k]).length) delete o[k];
+  if (!Object.keys(o).length) delete D.tec[key];
+  enqueue('tec:' + key, 'app_salvar_tecnica', { p_chave:key, p_valor: D.tec[key] || null });
+}
+function monthText(m){
+  const mk = `mes:${Y()}-${pad(m+1)}`; let t = `${MONTHS[m].toUpperCase()} ${Y()}${tecVal(mk,'tema') ? ' · ' + tecVal(mk,'tema') : ''}\n`;
+  if (tecVal(mk,'obs')) t += tecVal(mk,'obs') + '\n';
+  monthWeeks(m).forEach((w, i) => {
+    const key = 'sem:' + w.start; if (!D.tec[key]) return;
+    t += `\nSEMANA ${i+1} (${fmtS(w.days[0])} – ${fmtS(w.days[w.days.length-1])})\n`;
+    for (const [mod,label,fs] of TEC_F) for (const [f,l] of fs){ const v = tecVal(key, mod + '.' + f); if (v) t += `${label} · ${l}:\n${v}\n`; }
+    if (tecVal(key,'detalhes')) t += `Ajustes e detalhes:\n${tecVal(key,'detalhes')}\n`;
+  });
+  return t;
+}
+
+/* ---------- Estudos pessoais ---------- */
+const ST = { estudando:'Estudando', treinando:'Treinando', funcionando:'Funciona no rola' };
+const TIPO = { pe:'Em pé', chao:'Chão' };
+const ytId = u => (String(u).match(/(?:youtu\.be\/|[?&]v=|shorts\/|embed\/)([\w-]{11})/) || [])[1];
+const hostOf = u => { try{ return new URL(u).hostname.replace(/^www\./,''); }catch(e){ return ''; } };
+const saveStudy = id => { if (D.studies[id]) D.studies[id].mexido = new Date().toISOString(); enqueue('estudo:' + id, 'app_salvar_estudo', { p_id:id, p_dados: D.studies[id] || null }); };
+function runShortcut(name, text){ location.href = 'shortcuts://run-shortcut?name=' + encodeURIComponent(name) + '&input=text&text=' + encodeURIComponent(text); }
+function viewEst(T){
+  const f = UI.estF, all = Object.entries(D.studies);
+  const list = all.filter(([,s]) => f === 'todos' || (s.status || 'estudando') === f).sort((a,b) => (a[1].mexido || a[1].criado || '') < (b[1].mexido || b[1].criado || '') ? 1 : -1);
+  const n = k => all.filter(([,s]) => (s.status || 'estudando') === k).length;
+  return `<section class="sec"><div class="sec-h"><h2>Meus estudos</h2><span class="muted tiny">só você vê</span></div>
+    <div class="other" style="margin-top:0"><input type="text" id="estNew" maxlength="90" placeholder="Posição, técnica ou tema"><button class="btn dark" data-action="est-add">Criar</button></div>
+    <div class="chips" style="margin-top:12px"><button class="chip ${f === 'todos' ? 'on' : ''}" data-action="est-filter" data-v="todos">Todos ${all.length}</button>${Object.entries(ST).map(([k,l]) => `<button class="chip ${f === k ? 'on' : ''}" data-action="est-filter" data-v="${k}">${l} ${n(k)}</button>`).join('')}</div></section>
+    <section class="sec">${list.length ? list.map(([id,s]) => { const st = s.status || 'estudando', nl = (s.links || []).length, nn = (s.notas || []).length;
+      const meta = [MODS[s.mod]?.label, TIPO[s.tipo], nl ? plural(nl,'vídeo','vídeos') : '', nn ? plural(nn,'anotação','anotações') : ''].filter(Boolean).join(' · ');
+      return `<div class="row"><button class="rowbtn" data-action="est-open" data-id="${esc(id)}"><span class="t">${esc(s.titulo)}</span><br><span class="d">${esc(meta || 'sem anotações ainda')}</span></button><span class="tag st-${st}">${ST[st]}</span></div>`; }).join('')
+      : `<p class="empty">${all.length ? 'Nenhum estudo neste filtro.' : 'Crie um estudo para cada posição ou técnica que você quer evoluir. Dentro dele ficam os vídeos, as anotações e o progresso.'}</p>`}</section>`;
+}
+function studySheet(){
+  const id = UI.study, s = D.studies[id]; if (!s){ UI.study = null; return ''; }
+  const cur = { status: s.status || 'estudando', mod: s.mod || '', tipo: s.tipo || '' };
+  const chip = (f, v, l) => `<button class="chip ${cur[f] === v ? 'on' : ''}" data-action="est-set" data-f="${f}" data-v="${v}">${l}</button>`;
+  const links = s.links || [], notas = (s.notas || []).slice().reverse();
+  return `<div class="sheet-bg" data-action="close-sheet"><div class="sheet" data-stop="1" role="dialog" aria-label="Estudo">
+    <div class="grab"></div>
+    <div class="sheet-h"><input type="text" id="estTitle" maxlength="90" value="${esc(s.titulo)}" aria-label="Título do estudo"><button class="close" data-action="close-sheet" aria-label="Fechar">✕</button></div>
+    <span class="sub-h" style="margin-top:0">Progresso</span><div class="chips">${Object.entries(ST).map(([k,l]) => chip('status', k, l)).join('')}</div>
+    <span class="sub-h">Modalidade</span><div class="chips">${JJ.map(m => chip('mod', m, MODS[m].label)).join('')}</div>
+    <span class="sub-h">Tipo</span><div class="chips">${Object.entries(TIPO).map(([k,l]) => chip('tipo', k, l)).join('')}</div>
+    <span class="sub-h">Vídeos e links</span>
+    ${links.map((l, i) => { const yt = ytId(l.url); return `<div class="row"><span class="grow"><a class="t lk" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.titulo || hostOf(l.url) || l.url)}</a><br><span class="d">${esc(hostOf(l.url))}</span></span>${yt ? `<button class="btn sm" data-action="est-play" data-i="${i}">${UI.play === i ? 'Fechar' : 'Ver aqui'}</button>` : ''}<button class="xbtn" data-action="est-link-del" data-i="${i}" aria-label="Remover link">×</button></div>${yt && UI.play === i ? `<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/${yt}" title="Vídeo" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>` : ''}`; }).join('')}
+    <div class="other"><input type="url" id="estUrl" inputmode="url" autocapitalize="off" placeholder="Cole o link do vídeo"><button class="btn" data-action="est-link-add">Adicionar</button></div>
+    <span class="sub-h">Anotações, dicas e progresso</span>
+    <textarea id="estNote" rows="3" placeholder="Dica, detalhe, o que funcionou no rola…">${esc(UI.noteDraft)}</textarea>
+    <div class="actions" style="margin-top:8px"><button class="btn sm dark" data-action="est-note-add">Adicionar anotação</button>${IOS ? '<button class="btn sm" data-action="est-rec"><i class="rec-dot"></i>Gravar por voz</button>' : ''}</div>
+    ${notas.map(n => `<div class="note-i"><div class="d"><span>${fmtD(n.data)}</span><button class="link" style="font-size:13px" data-action="est-note-del" data-id="${esc(n.id)}">remover</button></div><div class="pre">${esc(n.texto)}</div></div>`).join('')}
+    <div class="actions"><button class="btn sm danger" data-action="est-del">Excluir este estudo</button></div>
+  </div></div>`;
 }
 
 /* ================= Ações ================= */
@@ -774,7 +945,8 @@ function download(name, content, type){ const b = new Blob([content], { type });
 function commitDay(d){ pruneEntry(d); saveDay(d); render(); }
 function exportJSON(){
   const data = { versao:2, gerado:new Date().toISOString(), compartilhado:{ ano:D.year, feriados:D.holidays, recessos:D.recess, eventos:D.events },
-    atletas:{ [D.me.id]: { nome:D.me.nome, metas:D.me.metas, grade:D.me.grade, afastamentos:D.me.afastamentos, dias:D.days } } };
+    tecnicas:D.tec,
+    atletas:{ [D.me.id]: { nome:D.me.nome, metas:D.me.metas, grade:D.me.grade, afastamentos:D.me.afastamentos, dias:D.days, estudos:D.studies } } };
   download(`treinos-${D.me.id}-${todayStr()}.json`, JSON.stringify(data, null, 1), 'application/json');
 }
 function exportCSV(){
@@ -790,10 +962,11 @@ async function importJSON(file){
     if (!confirm('Restaurar este backup? Seus registros atuais serão substituídos pelos do arquivo.')) return;
     await flush(); await rpc('app_importar', { p_dados: data });
     const c = data.compartilhado;
-    if (c && confirm('O arquivo também tem feriados, recessos e eventos (valem para os dois). Restaurar também?')){
-      if (c.feriados) await rpc('app_salvar_compartilhado', { p_chave:'feriados', p_valor:c.feriados });
-      if (c.recessos) await rpc('app_salvar_compartilhado', { p_chave:'recessos', p_valor:c.recessos });
-      if (c.eventos) await rpc('app_salvar_compartilhado', { p_chave:'eventos', p_valor:c.eventos });
+    if ((c || data.tecnicas) && confirm('O arquivo também tem feriados, recessos, eventos e técnicas (valem para os dois). Restaurar também?')){
+      for (const [k, v] of Object.entries(data.tecnicas || {})) await rpc('app_salvar_tecnica', { p_chave:k, p_valor:v });
+      if (c?.feriados) await rpc('app_salvar_compartilhado', { p_chave:'feriados', p_valor:c.feriados });
+      if (c?.recessos) await rpc('app_salvar_compartilhado', { p_chave:'recessos', p_valor:c.recessos });
+      if (c?.eventos) await rpc('app_salvar_compartilhado', { p_chave:'eventos', p_valor:c.eventos });
     }
     D = null; await load(); toast('Backup restaurado');
   }catch(e){ toast(e.message === 'formato' ? 'Arquivo inválido' : 'Não consegui restaurar: ' + e.message); }
@@ -805,12 +978,34 @@ document.addEventListener('click', ev => {
   if (el.dataset.action === 'close-sheet' && ev.target.closest('[data-stop]') && !ev.target.closest('.close')) return;
   const a = el.dataset.action, d = el.dataset.date, i = +el.dataset.i;
   switch (a){
-    case 'tab': UI.tab = el.dataset.id; UI.justify = null; scrollTo(0,0); render(); break;
+    case 'tab': UI.tab = el.dataset.id; UI.justify = null; UI.open = null; scrollTo(0,0); render(); break;
+    case 'mais': UI.mais = el.dataset.v; UI.open = null; render(); break;
+    case 'tmonth': UI.tmonth = clamp(UI.tmonth + +el.dataset.d, 0, 11); UI.open = null; render(); break;
+    case 'tec-copy': navigator.clipboard?.writeText(monthText(UI.tmonth)).then(() => toast('Mês copiado'), () => toast('Não consegui copiar')); break;
+    case 'reason-text': { const inp = el.closest('.reason').querySelector('.reason-in'), r = inp.value.trim(); if (!r){ inp.focus(); break; }
+      const s = ensureEntry(d).slots[i]; s.status = 'justified'; s.reason = r; UI.justify = null; commitDay(d); break; }
+    case 'rec': saveSummary(); runShortcut('Resumo do treino', d); break;
+    case 'est-filter': UI.estF = el.dataset.v; render(); break;
+    case 'est-add': { const t = val('estNew'); if (!t){ document.getElementById('estNew')?.focus(); break; }
+      const id = uid(); D.studies[id] = { titulo:t, status:'estudando', links:[], notas:[], criado:todayStr() }; saveStudy(id); UI.study = id; UI.play = null; UI.noteDraft = ''; render(); break; }
+    case 'est-open': UI.study = el.dataset.id; UI.play = null; UI.noteDraft = ''; render(); break;
+    case 'est-set': { const s = D.studies[UI.study], f = el.dataset.f, v = el.dataset.v; if (!s) break;
+      if (f === 'status') s.status = v; else s[f] = s[f] === v ? '' : v; saveStudy(UI.study); render(); break; }
+    case 'est-link-add': { const s = D.studies[UI.study]; let u = val('estUrl'); if (!s || !u){ document.getElementById('estUrl')?.focus(); break; }
+      if (!/^https?:\/\//i.test(u)) u = 'https://' + u; if (!hostOf(u).includes('.')){ toast('Link inválido'); break; }
+      (s.links ??= []).push({ url:u, titulo:'' }); saveStudy(UI.study); render(); break; }
+    case 'est-link-del': { const s = D.studies[UI.study]; if (!s) break; s.links.splice(i, 1); UI.play = null; saveStudy(UI.study); render(); break; }
+    case 'est-play': UI.play = UI.play === i ? null : i; render(); break;
+    case 'est-note-add': { const s = D.studies[UI.study], t = val('estNote'); if (!s || !t){ document.getElementById('estNote')?.focus(); break; }
+      (s.notas ??= []).push({ id:uid(), data:todayStr(), texto:t }); UI.noteDraft = ''; saveStudy(UI.study); render(); break; }
+    case 'est-note-del': { const s = D.studies[UI.study]; if (!s) break; s.notas = (s.notas || []).filter(n => n.id !== el.dataset.id); saveStudy(UI.study); render(); break; }
+    case 'est-del': if (confirm('Excluir este estudo, com os vídeos e as anotações?')){ const id = UI.study; delete D.studies[id]; UI.study = null; saveStudy(id); render(); } break;
+    case 'est-rec': { const s = D.studies[UI.study]; if (s) runShortcut('Nota de estudo', s.titulo); break; }
     case 'retry': load(); break;
     case 'logout': logout(); break;
     case 'month': UI.month = clamp(UI.month + +el.dataset.d, 0, 11); render(); break;
     case 'open-day': UI.sheet = d; UI.justify = null; render(); break;
-    case 'close-sheet': saveSummary(); UI.sheet = null; UI.justify = null; render(); break;
+    case 'close-sheet': saveSummary(); saveTitle(); UI.sheet = null; UI.study = null; UI.play = null; UI.justify = null; render(); break;
     case 'toggle-pend': UI.showAllPend = !UI.showAllPend; render(); break;
     case 'st': {
       const v = el.dataset.v, shown = daySlots(d)[i];
@@ -848,9 +1043,11 @@ document.addEventListener('click', ev => {
     case 'export-csv': exportCSV(); break;
   }
 });
-document.addEventListener('toggle', ev => { const el = ev.target; if (el.matches?.('details.cfg')){ if (el.open) UI.open = el.dataset.sec; else if (UI.open === el.dataset.sec) UI.open = null; } }, true);
+document.addEventListener('toggle', ev => { const el = ev.target; if (el.matches?.('details.cfg')){ if (el.open) UI.open = el.dataset.sec; else if (UI.open === el.dataset.sec) UI.open = ''; } }, true);
 document.addEventListener('change', ev => {
   const el = ev.target;
+  if (el.dataset.tec){ saveTec(el); return; }
+  if (el.id === 'estTitle'){ if (saveTitle()) render(); return; }
   if (el.id === 'importFile'){ if (el.files[0]) importJSON(el.files[0]); el.value = ''; return; }
   if (el.dataset.meta){ D.me.metas[el.dataset.meta] = el.value === '' ? 0 : +String(el.value).replace(',','.'); saveMe('metas'); return; }
   if (el.dataset.hol){ const h = D.holidays.find(x => x.id === el.dataset.hol); if (h){ h.closed = el.checked; saveShared('holidays'); render(); } return; }
@@ -858,22 +1055,43 @@ document.addEventListener('change', ev => {
   if (el.id === 'yearIn'){ const y = +el.value; if (y >= 2025 && y <= 2100){ D.year = y; _wk = null; UI.month = null; ensureYearHolidays(); saveShared('year'); render(); } return; }
   if (el.id === 'sumIn') saveSummary();
 });
+function saveTitle(){
+  const el = document.getElementById('estTitle'), s = D && D.studies[UI.study]; if (!el || !s) return false;
+  const n = el.value.trim(); if (!n || n === s.titulo) return false;
+  s.titulo = n; saveStudy(UI.study); return true;
+}
 function saveSummary(){
   const el = document.getElementById('sumIn'); if (!el || !D) return;
   const d = el.dataset.date, v = el.value.trim();
   if ((D.days[d]?.summary || '') === v) return;
   ensureEntry(d).summary = v; pruneEntry(d); saveDay(d);
 }
-document.addEventListener('input', ev => { if (ev.target.id === 'sumIn'){ clearTimeout(saveSummary.t); saveSummary.t = setTimeout(saveSummary, 900); } });
+document.addEventListener('input', ev => {
+  const el = ev.target;
+  if (el.id === 'sumIn'){ clearTimeout(saveSummary.t); saveSummary.t = setTimeout(saveSummary, 900); }
+  else if (el.id === 'estNote') UI.noteDraft = el.value;
+  else if (el.dataset?.tec){ clearTimeout(saveTec.t); saveTec.t = setTimeout(() => saveTec(el), 1200); }
+});
 document.addEventListener('submit', async ev => {
   if (ev.target.id !== 'loginForm') return; ev.preventDefault();
   const c = val('codeIn').replace(/\s+/g, ''); if (!c) return;
   code = c; LS.set(K.code, c); D = null; UI.loaded = false; render(); await load();
 });
-document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && UI.sheet){ saveSummary(); UI.sheet = null; render(); } });
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && (code || DEMO) && D && !UI.sheet) load(); });
+document.addEventListener('keydown', ev => {
+  if (ev.key === 'Escape' && (UI.sheet || UI.study)){ saveSummary(); saveTitle(); UI.sheet = null; UI.study = null; render(); }
+  if (ev.key === 'Enter' && ev.target.classList?.contains('reason-in')){ ev.preventDefault(); ev.target.closest('.reason').querySelector('[data-action="reason-text"]').click(); }
+  if (ev.key === 'Enter' && ev.target.id === 'estNew'){ ev.preventDefault(); document.querySelector('[data-action="est-add"]')?.click(); }
+  if (ev.key === 'Enter' && ev.target.id === 'estUrl'){ ev.preventDefault(); document.querySelector('[data-action="est-link-add"]')?.click(); }
+});
+// ao sair do app (ex.: para gravar no atalho), salva o que estava sendo digitado; ao voltar, busca o que mudou
+document.addEventListener('visibilitychange', () => {
+  if (!D) return;
+  if (document.visibilityState === 'hidden'){ saveSummary(); saveTitle(); const a = document.activeElement; if (a?.dataset?.tec) saveTec(a); return; }
+  const a = document.activeElement, typing = a && /^(TEXTAREA|INPUT)$/.test(a.tagName) && a.value && a.id !== 'sumIn';
+  if ((code || DEMO) && !typing) load();
+});
 addEventListener('online', () => { if (code) flush(); });
-let rsT; addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(() => { if (UI.tab === 'num' && D) render(); }, 150); });
+let rsT; addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(() => { if (UI.tab === 'mais' && UI.mais !== 'cfg' && D) render(); }, 150); });
 
 /* tooltip (mouse e toque) */
 const tip = document.getElementById('tip');
