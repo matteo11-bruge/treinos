@@ -462,6 +462,40 @@ textarea.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:
 .erow-a input.tt{text-align:center;font-variant-numeric:tabular-nums;padding-left:4px;padding-right:4px}
 .erow-b{display:flex;gap:8px;align-items:center;margin-top:6px}
 .erow-b select{margin-top:0;flex:1;min-width:0}
+
+/* Parte 3 (18/11): Academia, módulo do mês */
+.mhead{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:8px}
+.mnav{width:44px;height:44px;border-radius:50%;border:0;background:var(--fill);color:var(--ink);font-size:22px;line-height:1}
+.mnav:disabled{opacity:.35}
+.mt{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.mtt{font-size:18px;font-weight:700;letter-spacing:-.02em}
+.mt .d,.mtema .d{font-size:12.5px;color:var(--muted)}
+.mtema{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.mtema .grow{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mtema .t{font-size:17px;font-weight:650}
+.mobs{font-size:13.5px;color:var(--ink-2);white-space:pre-wrap;margin-top:4px}
+.wkrow{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:var(--surface);border-radius:16px;padding:13px 16px;margin-top:10px;color:inherit}
+.wkrow.muted-bg{background:var(--fill)}
+.wkrow .t,.wkhead .t{display:flex;align-items:center;gap:8px;font-size:15.5px;font-weight:650}
+.wkrow .d,.wkhead .d{display:block;font-size:12.5px;color:var(--muted)}
+.wkrow > .d{display:inline;font-size:13px}
+.nowtag{font-size:11.5px;font-weight:650;color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);border-radius:999px;padding:2px 8px}
+.wkopen{margin-top:10px}
+.wkhead{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:flex-start;gap:10px;width:100%;text-align:left;border:0;background:none;padding:0;color:inherit}
+.wkhead .t{font-size:17px;font-weight:700}
+.chev{font-size:18px;color:var(--ink-2);line-height:1}
+.asec{display:flex;flex-direction:column;gap:6px;padding:12px 0;border-top:1px solid var(--line);margin-top:12px}
+.asec + .asec{margin-top:0}
+.alab{font-size:12.5px;font-weight:650;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.alab.sm{font-size:12.5px;text-transform:none;letter-spacing:0;margin-top:4px}
+.agrp{font-size:16px;font-weight:700}
+.aitem{font-size:15px;line-height:1.35}
+.aitem.tagged{display:flex;gap:8px;align-items:flex-start}
+.stag{flex-shrink:0;font-size:11px;font-weight:650;color:var(--ink-2);background:var(--fill);border-radius:6px;padding:2px 6px;margin-top:1px}
+.arow2{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;font-size:15px;line-height:1.35}
+.arow2 .alab.sm{margin-top:2px}
+.afoot{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+.afoot .d{font-size:12.5px;color:var(--muted);line-height:1.35}
 </style>
 </head>
 <body>
@@ -893,11 +927,19 @@ function nextSat(T){
 function viewResumo(T){
   let h = '';
   if (pd(T).getFullYear() !== Y()){
-    const diff = Math.round((pd(`${Y()}-01-01`) - pd(T)) / 864e5);
-    h += `<section class="sec"><p class="mid" style="font-size:28px">${diff > 0 ? `Faltam ${diff} dias para ${Y()}` : `${Y()} terminou`}</p><p class="sub">Enquanto isso, confira a grade semanal, os feriados e os recessos em Ajustes.</p></section>`;
-    const up = upcoming(`${Y()}-01-01` > T ? `${Y()}-01-01` : T, 3);
-    if (up.length) h += `<section class="sec"><div class="sec-h"><h3>Próximos</h3></div>${up.map(u => `<div class="row"><span class="date-c">${fmtD(u.date)}</span><span class="grow"><span class="t">${esc(u.t)}</span> <span class="d">· ${esc(u.s)}</span></span></div>`).join('')}</section>`;
-    return h + gymBlock(T, null);
+    /* antes (ou depois) do ano configurado: mesmo layout, zerado */
+    const ini = `${Y()}-01-01`, diff = Math.round((pd(ini) - pd(T)) / 864e5), w0 = weeks().find(w => w.days.length === 7 && weekStat(w, T).goal > 0) || weeks()[0], S0 = D.me.metas;
+    if (diff <= 0) return h + `<section class="sec"><p class="mid" style="font-size:28px">${Y()} terminou</p><p class="sub">Troque o ano em Ajustes para começar a contar o próximo.</p></section>` + estudoCard(T) + gymBlock(T, null);
+    const st0 = weekStat(w0, T);
+    h += `<p class="rdate">${fmtDL(T)} · ${diff === 1 ? 'falta 1 dia' : `faltam ${diff} dias`} para ${Y()}</p>`;
+    h += `<section class="sec"><div class="sec-h"><h3>Semana</h3><span class="muted tiny">${fmtS(w0.start)} – ${fmtS(w0.end)}</span></div>
+      <div class="hero"><span class="big">0</span><span class="of">de ${fmtN(st0.goal)} treinos</span></div>
+      <p class="sub">A contagem começa em 1º de janeiro. Esta é a primeira semana completa de ${Y()}.</p>${weekStrip(w0, T, 'cal-day')}</section>`;
+    h += `<section class="sec"><div class="sec-h"><h3>Ano</h3><span class="muted tiny">meta ${S0.yearGoal}</span></div>
+      <div class="hero"><span class="mid">0</span><span class="of">treinos</span><span class="right muted">começa em 1º jan</span></div>
+      <div class="meter" role="img" aria-label="0 de ${S0.yearGoal}"><i style="width:0%"></i></div>
+      <p class="sub">Meta de ${S0.yearGoal} treinos em ${Y()}.</p></section>`;
+    return h + estudoCard(T) + gymBlock(T, null);
   }
   h += `<p class="rdate">${fmtDL(T)}</p>`;
   /* semana */
@@ -1463,6 +1505,137 @@ function demoCursos(st, T0){
   P['aula:c1:a4'] = { obs:'Pé no quadril antes de girar o corpo.', drill:'3 × 10 de cada lado, com parceiro', teste:'Tentar 2 vezes partindo da guarda fechada' };
 }
 
+/* ================= Parte 3 (18/11): Academia, módulo do mês ================= */
+const SEC3 = [['gi.pe', 'Gi em pé'], ['gi.chao', 'Gi chão'], ['nogi.pe', 'No-Gi em pé'], ['nogi.chao', 'No-Gi chão'], ['wrestling.tec', 'Wrestling'], ['detalhes', 'Detalhes']];
+const MOD3 = [['Gi', [['gi.pe', 'Em pé'], ['gi.chao', 'Chão']]], ['No-Gi', [['nogi.pe', 'Em pé'], ['nogi.chao', 'Chão']]], ['Wrestling', [['wrestling.tec', '']]], ['Detalhes', [['detalhes', '']]]];
+const linesOf = t => String(t || '').split(/\n+/).map(l => l.replace(/^[\s\-–•*·]+/, '').trim()).filter(Boolean);
+const wkRange = w => { const a = w.days[0], b = w.days[w.days.length - 1], ma = pd(a).getMonth(), mb = pd(b).getMonth(); return ma === mb ? `${pd(a).getDate()} a ${pd(b).getDate()} ${MON3[ma]}` : `${fmtS(a)} a ${fmtS(b)}`; };
+const MON3 = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+function nTec(key){ return SEC3.filter(([f]) => f !== 'detalhes').reduce((s, [f]) => s + linesOf(tecVal(key, f)).length, 0); }
+function vozTxt(v, T){
+  if (!v) return '';
+  const d = v.slice(0, 10), h = v.slice(11, 16), n = Math.round((pd(T) - pd(d)) / 864e5);
+  return `Atualizado por voz<br>${n === 0 ? 'hoje' : n === 1 ? 'ontem' : fmtS(d)}${h ? ', ' + h : ''}`;
+}
+function secBlocks(key){
+  let h = ''; const empty = [];
+  for (const [f, l] of SEC3){ const ls = linesOf(tecVal(key, f)); if (!ls.length){ empty.push(l); continue; } h += `<div class="asec"><span class="alab">${l}</span>${ls.map(x => `<div class="aitem">${esc(x)}</div>`).join('')}</div>`; }
+  return { h, empty };
+}
+function weekExtras(key, w){
+  const links = D.tec[key]?.links || [], sums = w.days.filter(d => (D.days[d]?.summary || '').trim() || (D.days[d]?.audios || []).length);
+  let h = '';
+  if (links.length) h += `<div class="asec"><span class="alab">Vídeos da semana</span>${links.map((l, i) => vid(l.url, 'tl:' + key + ':' + i, 'Vídeo ' + (i + 1))).join('')}</div>`;
+  if (sums.length) h += `<div class="asec"><span class="alab">Falas e observações dos dias</span>${sums.map(d => { const e = D.days[d], txt = [(e.summary || '').trim(), ...(e.audios || []).map(a => 'Fala: ' + a.texto)].filter(Boolean).join('\n'); return `<div class="note-i"><div class="d"><span>${fmtDL(d)}</span></div><div class="pre">${esc(txt)}</div></div>`; }).join('')}</div>`;
+  return h;
+}
+function weekFoot(key, w, T){
+  const v = D.tec[key]?._voz, rd = w.days.includes(T) ? T : w.days[0];
+  return `<div class="afoot"><span class="d">${vozTxt(v, T)}</span><span class="actions" style="margin:0">${IOS ? `<button class="btn sm" data-action="rec" data-date="${rd}"><i class="rec-dot"></i>Gravar</button>` : ''}<button class="btn sm" data-action="modal" data-t="acad-sem" data-k="${key}">Editar semana</button></span></div>`;
+}
+function apresBody(types, key, w, T){
+  const ens = types.filter(x => x.t === 'ensino'), by = UI.apBy === 'sem' ? 'sem' : 'mod';
+  let h = `<p class="note" style="margin-top:6px">Tudo o que foi ensinado ${ens.length ? `nas semanas ${ens.map(x => x.n).join(', ').replace(/, (\d+)$/, ' e $1')}` : 'nas semanas de ensino'}, gravado por voz ou digitado.</p>
+    <div class="seg mini" style="margin-top:10px">${[['mod', 'Por modalidade'], ['sem', 'Por semana']].map(([k, l]) => `<button data-action="ap-by" data-v="${k}" aria-pressed="${by === k}">${l}</button>`).join('')}</div>`;
+  let body = '';
+  if (by === 'mod'){
+    for (const [g, fs] of MOD3){
+      let inner = '';
+      for (const [f, sl] of fs){
+        const rows = ens.flatMap(x => linesOf(tecVal('sem:' + x.w.start, f)).map(t => `<div class="aitem tagged"><span class="stag">S${x.n}</span><span>${esc(t)}</span></div>`));
+        if (rows.length) inner += (sl ? `<span class="alab sm">${sl}</span>` : '') + rows.join('');
+      }
+      if (inner) body += `<div class="asec"><span class="agrp">${g}</span>${inner}</div>`;
+    }
+  } else {
+    for (const x of ens){
+      const k = 'sem:' + x.w.start, rows = SEC3.flatMap(([f, l]) => linesOf(tecVal(k, f)).map(t => `<div class="arow2"><span class="alab sm">${l}</span><span>${esc(t)}</span></div>`));
+      if (rows.length) body += `<div class="asec"><span class="agrp" style="display:flex;justify-content:space-between"><span>Ensino ${x.n}</span><span class="muted tiny">${wkRange(x.w)}</span></span>${rows.join('')}</div>`;
+    }
+  }
+  h += body || `<p class="empty" style="margin-top:10px">Ainda não há técnicas anotadas nas semanas de ensino deste mês.</p>`;
+  const pk = 'apres:' + w.start, mine = D.pes[pk]?.texto || '';
+  h += `<div class="asec"><span class="agrp">Minha apresentação</span><p class="note" style="margin:0 0 6px">Só você vê. O que vai demonstrar e os pontos para lembrar.</p><textarea data-apres="${pk}" rows="${Math.max(3, rowsFor(mine))}" placeholder="Posições que vou mostrar, ordem, detalhes que não posso esquecer">${esc(mine)}</textarea></div>`;
+  const own = secBlocks(key);
+  if (own.h) h += `<div class="asec"><span class="agrp">Gravado nesta semana</span></div>${own.h}`;
+  return h;
+}
+function viewTec(T){
+  if (UI.tmonth == null) UI.tmonth = pd(T).getFullYear() === Y() ? pd(T).getMonth() : 0;
+  const m = UI.tmonth, mk = `mes:${Y()}-${pad(m + 1)}`, cur = pd(T).getFullYear() === Y() ? weekOf(T) : null, types = weekTypes(m);
+  const tema = tecVal(mk, 'tema'), obs = tecVal(mk, 'obs');
+  const arrow = (d, l) => `<button class="mnav" data-action="tmonth" data-d="${d}" aria-label="${l}" ${(d < 0 ? m === 0 : m === 11) ? 'disabled' : ''}>${d < 0 ? '‹' : '›'}</button>`;
+  let h = `<section class="sec" id="acadMes"><div class="mhead">${arrow(-1, 'Mês anterior')}<div class="mt"><span class="mtt">${MONTHS[m]} ${Y()}</span><span class="d">módulo de ${MONTHS[m].toLowerCase()} · ${plural(types.length, 'semana', 'semanas')}</span></div>${arrow(1, 'Próximo mês')}</div>
+    <div class="mtema"><div class="grow"><span class="d">Tema do módulo</span><span class="t">${tema ? esc(tema) : '<span class="muted">sem tema ainda</span>'}</span>${obs ? `<span class="mobs">${esc(obs)}</span>` : ''}</div><button class="link" data-action="modal" data-t="acad-mes" data-k="${mk}">Editar</button></div></section>`;
+  const openId = UI.open == null ? (cur && types.some(x => x.w.start === cur.start) ? 'w:' + cur.start : '') : UI.open;
+  for (const x of types){
+    const { w, t, n } = x, key = 'sem:' + w.start, id = 'w:' + w.start, isCur = cur && cur.start === w.start, past = w.days[w.days.length - 1] < T, fut = w.days[0] > T;
+    const name = t === 'ensino' ? 'Ensino ' + n : WT[t];
+    const nt = nTec(key), ens = types.filter(y => y.t === 'ensino').map(y => y.n);
+    const sum = t === 'ensino' ? (nt ? plural(nt, 'técnica', 'técnicas') : fut ? 'ainda não começou' : 'sem registro') : t === 'apres' ? (ens.length ? `junta as semanas ${ens.join(', ').replace(/, (\d+)$/, ' e $1')}` : 'apresentação') : 'treino livre';
+    if (openId !== id){
+      h += `<button class="wkrow ${t === 'livre' ? 'muted-bg' : ''}" data-action="wk-open" data-id="${id}" aria-expanded="false"><span class="grow"><span class="t">${name}${isCur ? ' <span class="nowtag">esta semana</span>' : ''}</span><span class="d">${wkRange(w)}</span></span><span class="d">${sum} ›</span></button>`;
+      continue;
+    }
+    let body = '';
+    if (t === 'apres') body = apresBody(types, key, w, T);
+    else {
+      const sb = secBlocks(key);
+      if (t === 'livre') body += `<p class="note" style="margin-top:6px">Treino livre, sem posição nova. O módulo novo começa no mês seguinte.</p>`;
+      body += sb.h || (t === 'ensino' ? `<p class="empty" style="margin-top:10px">${fut ? 'A semana ainda não começou.' : 'Nada anotado nesta semana. Grave por voz depois do treino ou toque em Editar semana.'}</p>` : '');
+      if (sb.h && sb.empty.length && t === 'ensino') body += `<p class="note" style="border-top:1px solid var(--line);padding-top:10px;margin-top:4px">Sem registro: ${sb.empty.join(', ')}</p>`;
+    }
+    body += weekExtras(key, w) + weekFoot(key, w, T);
+    h += `<section class="sec wkopen"><button class="wkhead" data-action="wk-open" data-id="${id}" aria-expanded="true"><span class="grow"><span class="t">${name}${isCur ? ' <span class="nowtag">esta semana</span>' : ''}</span><span class="d">${wkRange(w)}${x.auto ? '' : ' · tipo trocado à mão'}</span></span><span class="chev">⌄</span></button>${body}</section>`;
+  }
+  if (!types.length) h += `<p class="empty">Nenhuma semana neste mês.</p>`;
+  return h;
+}
+function acadMesSheet(mk){
+  const m = +mk.slice(-2) - 1;
+  return sheetWrap('Módulo do mês', `${sheetHead(`<div style="flex:1"><h2>Módulo de ${MONTHS[m].toLowerCase()}</h2><p class="muted small">Vale para os dois: o que um escreve aparece para o outro.</p></div>`)}
+    <label class="lbl">Tema do módulo<input type="text" data-tec="${mk}" data-f="tema" maxlength="80" value="${esc(tecVal(mk, 'tema'))}" placeholder="Ex.: Guarda fechada"></label>
+    <label class="lbl" style="margin-top:12px">Observações do mês<textarea data-tec="${mk}" data-f="obs" rows="${Math.max(3, rowsFor(tecVal(mk, 'obs')))}" placeholder="Conceitos gerais, o que o professor enfatizou…">${esc(tecVal(mk, 'obs'))}</textarea></label>
+    <div class="actions"><button class="btn sm" data-action="tec-copy">Copiar o mês inteiro</button><button class="btn dark" data-action="close-sheet">Pronto</button></div>`);
+}
+function acadSemSheet(key){
+  const start = key.slice(4), m = pd(start).getMonth(), x = weekTypes(UI.tmonth ?? m).find(y => y.w.start === start) || weekTypes(m).find(y => y.w.start === start);
+  if (!x) return '';
+  const auto = (() => { const o = D.tec[key]?.tipo; if (!o) return x.t; const sv = D.tec[key].tipo; delete D.tec[key].tipo; const t = weekTypes(pd(x.w.days[0]).getMonth()).find(y => y.w.start === start).t; D.tec[key].tipo = sv; return t; })();
+  const name = x.t === 'ensino' ? 'Ensino ' + x.n : WT[x.t], links = D.tec[key]?.links || [];
+  const ta = (f, l, ph) => `<label class="lbl" style="margin-top:12px">${l}<textarea data-tec="${key}" data-f="${f}" rows="${Math.max(2, rowsFor(tecVal(key, f)))}" placeholder="${ph}">${esc(tecVal(key, f))}</textarea></label>`;
+  return sheetWrap('Editar semana', `${sheetHead(`<div style="flex:1"><h2>Editar semana</h2><p class="muted small">${name} · ${wkRange(x.w)}</p></div>`)}
+    <span class="sub-h" style="margin-top:0">Tipo da semana</span>
+    <div class="chips"><button class="chip ${x.auto ? 'on' : ''}" data-action="wk-type" data-key="${key}" data-v="">Automático (${WT[auto]})</button>${Object.entries(WT).map(([k, l]) => `<button class="chip ${!x.auto && x.t === k ? 'on' : ''}" data-action="wk-type" data-key="${key}" data-v="${k}">${l}</button>`).join('')}</div>
+    <p class="note">O app segue Ensino 1, 2, 3, Apresentação e Saco cheio. Troque só se a academia mudar a ordem.</p>
+    ${SEC3.map(([f, l]) => ta(f, l, f === 'detalhes' ? 'Pegadas, erros comuns, correções do professor…' : 'Técnica e passo a passo…')).join('')}
+    <span class="sub-h">Vídeos da semana</span>${links.map((l, i) => `<div class="vrow"><div>${vid(l.url, 'tl:' + key + ':' + i)}</div><button class="xbtn" data-action="tl-del" data-key="${key}" data-i="${i}" aria-label="Remover vídeo">×</button></div>`).join('')}
+    <div class="other"><input type="url" inputmode="url" autocapitalize="off" class="tl-in" placeholder="Cole o link do vídeo"><button class="btn" data-action="tl-add" data-key="${key}">Adicionar</button></div>
+    <div class="actions"><button class="btn dark" style="flex:1;justify-content:center" data-action="close-sheet">Pronto</button></div>`);
+}
+function p3Action(a, el, T){
+  switch (a){
+    case 'wk-open': { const id = el.dataset.id, cur = pd(T).getFullYear() === Y() ? weekOf(T) : null, openNow = UI.open == null ? (cur ? 'w:' + cur.start : '') : UI.open; UI.open = openNow === id ? '' : id; UI.play = null; return true; }
+    case 'ap-by': UI.apBy = el.dataset.v; return true;
+  }
+  return null;
+}
+function p3Change(el){
+  if (el.dataset?.apres){ const k = el.dataset.apres, v = el.value.trim(); if (v) D.pes[k] = { texto:el.value }; else delete D.pes[k]; savePes(k); return true; }
+  return false;
+}
+/* deslizar para trocar de mês na Academia */
+(() => {
+  let x0 = null, y0 = 0;
+  document.addEventListener('touchstart', e => { if (UI.tab !== 'est' || UI.estTab !== 'tec' || UI.modal || UI.sheet || e.touches.length !== 1 || e.target.closest('input,textarea,iframe,.seg')) { x0 = null; return; } x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive:true });
+  document.addEventListener('touchend', e => {
+    if (x0 == null) return; const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
+    if (Math.abs(dx) < 70 || Math.abs(dx) < 2 * Math.abs(dy)) return;
+    const n = clamp((UI.tmonth ?? 0) + (dx < 0 ? 1 : -1), 0, 11); if (n === UI.tmonth) return;
+    UI.tmonth = n; UI.open = null; UI.play = null; render(); scrollTo(0, 0);
+  }, { passive:true });
+})();
+
 /* ---------- Calendário ---------- */
 function viewCal(T){
   if (UI.month === null) UI.month = pd(T).getFullYear() === Y() ? pd(T).getMonth() : 0;
@@ -1682,7 +1855,7 @@ function viewEstudos(T){
 }
 
 /* ---------- Técnicas: mês → semanas com tipo (Ensino / Apresentação / Livre) ---------- */
-const WT = { ensino:'Ensino', apres:'Apresentação', livre:'Livre' };
+const WT = { ensino:'Ensino', apres:'Apresentação', livre:'Saco cheio' };
 const tecHas = key => { const v = D.tec[key]; return !!(v && (v.gi || v.nogi || v.wrestling || v.detalhes)); };
 function weekTypes(m){
   let n = 0, ap = false;
@@ -1695,41 +1868,8 @@ function weekTypes(m){
 function weekFieldsText(key){
   let t = '';
   for (const [mod, label, fs] of TEC_F) for (const [f, l] of fs){ const v = tecVal(key, mod + '.' + f); if (v) t += `${label} · ${l}:\n${v}\n\n`; }
-  if (tecVal(key, 'detalhes')) t += `Ajustes e detalhes:\n${tecVal(key, 'detalhes')}\n`;
+  if (tecVal(key, 'detalhes')) t += `Detalhes:\n${tecVal(key, 'detalhes')}\n`;
   return t.trim();
-}
-function viewTec(T){
-  if (UI.tmonth == null) UI.tmonth = pd(T).getFullYear() === Y() ? pd(T).getMonth() : 0;
-  const m = UI.tmonth, mk = `mes:${Y()}-${pad(m+1)}`, cur = pd(T).getFullYear() === Y() ? weekOf(T) : null, types = weekTypes(m);
-  const ta = (key, f, ph) => `<textarea data-tec="${key}" data-f="${f}" rows="${rowsFor(tecVal(key,f))}" placeholder="${ph}">${esc(tecVal(key,f))}</textarea>`;
-  let h = `<section class="sec"><div class="mh"><button data-action="tmonth" data-d="-1" aria-label="Mês anterior">‹</button><h2>${MONTHS[m]}</h2><button data-action="tmonth" data-d="1" aria-label="Próximo mês">›</button></div>
-    <label class="field" style="margin-top:8px"><span>Tema do mês</span><input type="text" data-tec="${mk}" data-f="tema" value="${esc(tecVal(mk,'tema'))}" placeholder="Ex.: Pegada de costas"></label>
-    <label class="field"><span>Observações do mês</span>${ta(mk, 'obs', 'Conceitos gerais, o que o sensei enfatizou…')}</label>
-    <div class="actions"><button class="btn sm" data-action="tec-copy">Copiar o mês inteiro</button></div>
-    <p class="note">Vale para os dois: o que um escreve aparece para o outro.</p></section><div class="cfg-group">`;
-  types.forEach(({ w, t, auto, label }) => {
-    const key = 'sem:' + w.start, id = 'w:' + w.start, links = D.tec[key]?.links || [];
-    const open = UI.open === id || (UI.open == null && cur && cur.start === w.start);
-    const sums = w.days.filter(d => (D.days[d]?.summary || '').trim() || (D.days[d]?.audios || []).length);
-    let body = `<span class="sub-h" style="margin-top:0">Tipo da semana</span><div class="chips">${Object.entries(WT).map(([k,l]) => `<button class="chip ${t === k ? 'on' : ''}" data-action="wk-type" data-key="${key}" data-v="${k}">${k === 'livre' ? 'Livre (sem posição)' : l}</button>`).join('')}${auto ? '' : `<button class="chip" data-action="wk-type" data-key="${key}" data-v="">Automático</button>`}</div>`;
-    if (t === 'ensino'){
-      body += TEC_F.map(([mod,lb,fs]) => `<div class="tec-mod"><div class="tec-h"><span class="dot ${mod}"></span>${lb}</div>${fs.map(([f,l]) => `<label class="field"><span>${l}</span>${ta(key, mod + '.' + f, 'Técnica e passo a passo…')}</label>`).join('')}</div>`).join('')
-        + `<div class="tec-mod"><div class="tec-h">Ajustes e detalhes</div><label class="field"><span>O que faz a técnica funcionar</span>${ta(key, 'detalhes', 'Pegadas, erros comuns, correções do sensei…')}</label></div>`
-        + (IOS ? `<div class="actions"><button class="btn sm dark" data-action="rec" data-date="${w.days.includes(T) ? T : w.days[0]}"><i class="rec-dot"></i>Gravar por voz nesta semana</button></div>` : '');
-    } else if (t === 'apres'){
-      const rev = types.filter(x => x.t === 'ensino' && tecHas('sem:' + x.w.start));
-      body += `<div class="tec-mod"><div class="tec-h">Revisão para a apresentação</div><p class="note" style="margin-top:4px">Nesta semana os alunos demonstram o que aprenderam. Abaixo está o que foi anotado nas semanas de ensino deste mês.</p>
-        ${rev.length ? rev.map(x => `<div class="note-i"><div class="d"><span>${x.label} · ${fmtS(x.w.days[0])} – ${fmtS(x.w.days[x.w.days.length-1])}</span></div><div class="pre">${esc(weekFieldsText('sem:' + x.w.start))}</div></div>`).join('') : '<p class="empty">Ainda não há técnicas anotadas nas semanas de ensino deste mês.</p>'}</div>
-        <div class="tec-mod"><div class="tec-h">Minha apresentação</div><label class="field"><span>O que vou demonstrar e pontos para lembrar</span>${ta(key, 'detalhes', 'Posições que vou mostrar, ordem, detalhes que não posso esquecer…')}</label></div>`;
-    } else {
-      body += `<div class="tec-mod"><div class="tec-h">Semana livre</div><p class="note" style="margin-top:4px">Tem treino, mas sem posição nova. O cronograma continua na semana seguinte.</p><label class="field"><span>Anotações</span>${ta(key, 'detalhes', 'O que foi treinado, o que revisei…')}</label></div>`;
-    }
-    body += `<div class="tec-mod"><div class="tec-h">Vídeos da semana</div>${links.map((l, i) => `<div class="vrow"><div>${vid(l.url, 'tl:' + key + ':' + i)}</div><button class="xbtn" data-action="tl-del" data-key="${key}" data-i="${i}" aria-label="Remover vídeo">×</button></div>`).join('')}
-        <div class="other"><input type="url" inputmode="url" autocapitalize="off" class="tl-in" placeholder="Cole o link do vídeo"><button class="btn" data-action="tl-add" data-key="${key}">Adicionar</button></div></div>
-      <div class="tec-mod"><div class="tec-h">Falas e observações dos dias</div>${sums.length ? sums.map(d => { const e = D.days[d], txt = [(e.summary || '').trim(), ...(e.audios || []).map(a => 'Fala: ' + a.texto)].filter(Boolean).join('\n'); return `<div class="row"><button class="rowbtn" data-action="open-day" data-date="${d}"><span class="t">${fmtD(d)}</span><br><span class="d pre clamp">${esc(txt)}</span></button></div>`; }).join('') : '<p class="note">As falas gravadas e as observações dos dias desta semana aparecem aqui, como registro.</p>'}</div>`;
-    h += `<details class="cfg" data-sec="${id}" ${open ? 'open' : ''}><summary>${label}<span class="s">${fmtS(w.days[0])} – ${fmtS(w.days[w.days.length-1])}${tecHas(key) ? ' · preenchida' : ''}</span></summary><div class="in">${body}</div></details>`;
-  });
-  return h + '</div>';
 }
 function saveTec(el){
   if (!D) return;
@@ -2013,7 +2153,7 @@ function mobDaySheet(k){
 /* ---------- janela (modal) e ações ---------- */
 function modalSheet(){
   const m = UI.modal; if (!m) return '';
-  const h = { ficha:fichaSheet, sessao:sessionSheet, ex:exSheet, mob:mobSheet, mobdia:mobDaySheet, plano:planSheet, novoplano:newPlanSheet, medir:medirSheet, 'curso-novo':novoSheet, 'curso-edit':editSheet }[m.t]?.(m.k) || '';
+  const h = { ficha:fichaSheet, sessao:sessionSheet, ex:exSheet, mob:mobSheet, mobdia:mobDaySheet, plano:planSheet, novoplano:newPlanSheet, medir:medirSheet, 'curso-novo':novoSheet, 'curso-edit':editSheet, 'acad-mes':acadMesSheet, 'acad-sem':acadSemSheet }[m.t]?.(m.k) || '';
   if (!h) UI.modal = null; return h;
 }
 function closeModal(){
@@ -2139,6 +2279,7 @@ document.addEventListener('click', ev => {
   if (el.dataset.action === 'close-sheet' && el.classList.contains('sheet-bg') && ev.target.closest('[data-stop]')) return;
   const a = el.dataset.action, d = el.dataset.date, i = +el.dataset.i;
   if (a === 'modal' && el.dataset.t === 'curso-edit'){ editOpen(el.dataset.k); UI.modal = { t:'curso-edit', k:el.dataset.k }; render(); return; }
+  const r3 = p3Action(a, el, todayStr()); if (r3 !== null){ if (r3) render(); return; }
   const r2 = p2Action(a, el, todayStr()); if (r2 !== null){ if (r2) render(); return; }
   const r1 = p1Action(a, el, todayStr()); if (r1 !== null){ if (r1) render(); return; }
   const r4 = v4Action(a, el, todayStr()); if (r4 !== null){ if (r4) render(); return; }
@@ -2213,6 +2354,7 @@ document.addEventListener('click', ev => {
 document.addEventListener('toggle', ev => { const el = ev.target; if (el.matches?.('details.cfg')){ if (el.open) UI.open = el.dataset.sec; else if (UI.open === el.dataset.sec) UI.open = ''; } }, true);
 document.addEventListener('change', ev => {
   const el = ev.target;
+  if (p3Change(el)) return;
   if (p2Change(el)) return;
   if (p1Change(el)) return;
   if (v4Change(el)) return;
