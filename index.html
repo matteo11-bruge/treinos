@@ -386,6 +386,82 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .mbox .u{color:var(--muted);font-size:14px}
 .mres{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--line);margin-top:18px;padding-top:14px}
 .mres .d{font-size:13px;color:var(--muted)}
+
+/* Parte 2 (18/11): Estudos em formato de curso */
+.dots{display:inline-flex;gap:3px;vertical-align:middle}
+.dots i{width:7px;height:7px;border-radius:50%;border:1.5px solid var(--line-2);box-sizing:border-box}
+.dots i.on{background:var(--accent);border-color:var(--accent)}
+.ctit{font-size:18px;font-weight:650;margin:2px 0}
+.btn.wide{width:100%;justify-content:center;min-height:48px;margin-top:12px}
+.crow{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 0;border-top:1px solid var(--line);color:inherit}
+.crow-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.crow .t{font-size:16px;font-weight:650}
+.crow .d{display:block;font-size:13px;color:var(--muted)}
+.crow-h .d{display:inline}
+.meter.sm{height:6px;margin:8px 0 6px}
+.crow .meter{display:block}
+.subbar{display:flex;justify-content:space-between;align-items:center;min-height:44px;margin:4px 2px 0}
+.ptitle{font-size:26px;font-weight:700;letter-spacing:-.03em;margin:2px 2px 2px;line-height:1.15}
+.ptitle + .muted{margin:0 2px 4px}
+.arow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;text-align:left;border:0;background:none;padding:11px 0;border-top:1px solid var(--line);color:inherit}
+.arow.cur{background:color-mix(in srgb,var(--accent) 9%,transparent);border-radius:12px;padding:11px 8px;margin:0 -8px;width:calc(100% + 16px);border-top-color:transparent}
+.arow .grow{min-width:0}
+.arow .t{display:block;font-size:15px;font-weight:600}
+.arow .d{display:block;font-size:12.5px;color:var(--muted)}
+.arow .also{display:block;font-size:12px;color:var(--accent);font-weight:600;margin-top:2px}
+.aright{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.aright .d{font-size:12px;color:var(--muted)}
+.aic{width:24px;height:24px;border-radius:50%;border:2px solid var(--line-2);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;box-sizing:border-box}
+.aic.ok{background:var(--good);border-color:var(--good)}
+.aic.cur{background:var(--accent);border-color:var(--accent);font-size:10px}
+.revtag{display:inline-block;font-size:11.5px;font-weight:650;color:var(--ink);background:color-mix(in srgb,#e0a100 26%,transparent);border-radius:999px;padding:1px 7px;vertical-align:1px}
+.vbox{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;aspect-ratio:16/9;border:0;border-radius:16px;background:#2b2a28;color:#fff;font-size:14.5px;font-weight:600;margin-top:12px}
+.vplay{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:20px}
+.vlinks{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 2px 10px;font-size:14px}
+.yt.big{margin-top:12px}
+.seg2.big{min-width:0;margin-top:4px}
+.seg2.big button{min-height:48px}
+.seg2 button.on{background:var(--ink);color:var(--surface)}
+.lvl{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:6px}
+.lvl button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 0;min-height:56px;font-size:12px;color:var(--ink-2)}
+.lvl i{width:22px;height:22px;border-radius:50%;border:2px solid var(--line-2);box-sizing:border-box}
+.lvl button.past i{background:color-mix(in srgb,var(--accent) 35%,transparent);border-color:transparent}
+.lvl button.on i{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.lvl button.on span{font-weight:700;color:var(--ink)}
+.lblrow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
+.lblrow .lbl{margin:0}
+.nextbar{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;background:var(--surface);border-radius:16px;padding:14px 16px;margin-top:12px;font-size:15px;font-weight:650;color:var(--ink);text-align:left}
+.nextbar span:last-child{color:var(--accent);font-size:18px}
+.lvtiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.lvtiles > div{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--fill);border-radius:12px;padding:10px 2px}
+.lvtiles b{font-size:22px;line-height:1}
+.lvtiles span{font-size:11px;font-weight:600;color:var(--ink-2);text-align:center;line-height:1.2}
+.tecbar{display:flex;gap:8px;align-items:center;margin-top:12px}
+.search{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:11px;padding:0 12px;min-height:44px;color:var(--muted)}
+.search input[type=search]{flex:1;min-width:0;width:100%;border:0;background:transparent;padding:0;min-height:0;font-size:15px}
+.search input[type=search]:focus{background:transparent;border:0}
+.seg.mini{flex-shrink:0;width:auto}
+.fbox{background:var(--fill);border-radius:14px;padding:12px;margin-top:12px}
+.fbox .sec-h{margin-bottom:6px}
+.fbox .lbl{margin-top:10px}
+.fbox .chip{background:var(--surface)}
+.fbox .chip.on{background:var(--ink);color:var(--surface)}
+.fbox input[type=text],.fbox input[type=url],.fbox textarea,.fbox select{background:var(--surface)}
+textarea.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px}
+.pmod{font-size:14px;font-weight:700;margin:12px 0 2px}
+.prow{border-top:1px solid var(--line);padding:9px 0}
+.prow .t{font-size:14.5px;font-weight:600}
+.prow-b{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px}
+.prow-b .d{font-size:12.5px;color:var(--muted)}
+.prow-l select,.erow-b select{width:100%;margin-top:6px;font-size:13.5px;min-height:38px;padding:4px 8px}
+.mseg{display:inline-flex;background:var(--line);border-radius:9px;padding:2px;gap:2px;flex-shrink:0}
+.mseg button{border:0;background:none;border-radius:7px;padding:6px 9px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.mseg button[aria-pressed=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.erow{border-top:1px solid var(--line);padding:8px 0}
+.erow-a{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:6px;align-items:center}
+.erow-a input.tt{text-align:center;font-variant-numeric:tabular-nums;padding-left:4px;padding-right:4px}
+.erow-b{display:flex;gap:8px;align-items:center;margin-top:6px}
+.erow-b select{margin-top:0;flex:1;min-width:0}
 </style>
 </head>
 <body>
@@ -409,7 +485,7 @@ const LS = {
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
   del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
-const K = { code:'treinos-codigo', cache:'treinos-cache', queue:'treinos-fila', theme:'treinos-tema', demo:'treinos-demo5' };
+const K = { code:'treinos-codigo', cache:'treinos-cache', queue:'treinos-fila', theme:'treinos-tema', demo:'treinos-demo6' };
 const QS = new URLSearchParams(location.search);
 const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || QS.get('ios') === '1';
 
@@ -572,7 +648,7 @@ function demoSeed(){
     { id:'x1', nome:'Supino reto', alvo:'3 séries · 8 a 10 reps', link:'', sets:[{ kg, reps:r, ok:true }, { kg, reps:r - 1, ok:true }, { kg, reps:r - 2, ok:true }] },
     { id:'x2', nome:'Remada curvada', alvo:'3 séries · 10 reps', link:'', sets:[{ kg:kg - 5, reps:10, ok:true }, { kg:kg - 5, reps:10, ok:true }, { kg:kg - 5, reps:9, ok:true }] },
     { id:'x3', nome:'Barra fixa', alvo:'3 séries · máximo reps', link:'', sets:[{ kg:'', reps:r, ok:true }, { kg:'', reps:r - 2, ok:true }] }] }; });
-  { const T0 = todayStr(); let kg = 69.1;
+  { const T0 = todayStr(); demoCursos(st, T0); let kg = 69.1;
     for (let i = 62; i >= 0; i--){ const d = ds(addDays(pd(T0), -i)); kg += 0.022; if (rnd() < 0.18) continue; st.pes['peso:' + d] = { kg: Math.round((kg + (rnd() - 0.5) * 0.6) * 10) / 10 }; }
     const sat = addDays(pd(T0), -((pd(T0).getDay() + 1) % 7));
     [[ds(addDays(sat, -7)), [37.1, 36.9], [82.4, 82.2]], [ds(sat), [37.0, 37.0], [82.2, 81.8]]].forEach(([d, pc, ci]) => { const g = navy((ci[0] + ci[1]) / 2, (pc[0] + pc[1]) / 2, 175); st.pes['medida:' + d] = { pescoco:pc, cintura:ci, altura:175, gordura:Math.round(g * 10) / 10 }; }); }
@@ -843,7 +919,7 @@ function viewResumo(T){
     <div class="meter" role="img" aria-label="${t.present} de ${S.yearGoal}; esperado até hoje ${fmtN(ys.expected)}"><i style="width:${clamp(t.present / S.yearGoal * 100, 0, 100)}%"></i><b style="left:${clamp(ys.expected / S.yearGoal * 100, 0, 100)}%"></b></div>
     <p class="sub">Projeção: ${ys.projection} em dezembro · sequência de ${plural(ys.streak, 'semana', 'semanas')}</p></section>`;
   /* estudo */
-  h += planNow(T);
+  h += estudoCard(T);
   /* musculação + peso */
   h += gymBlock(T, st);
   return h;
@@ -1027,6 +1103,364 @@ function p1Change(el){
 function p1Input(el){
   if (el.dataset?.med && UI.med){ const [f, j] = el.dataset.med.split('.'); if (f === 'altura') UI.med.altura = el.value; else UI.med[f][+j] = el.value; const r = document.getElementById('medRes'); if (r) r.innerHTML = medResHtml(); return true; }
   return false;
+}
+
+/* ================= Parte 2 (18/11): Estudos em formato de curso ================= */
+const LVL = ['Vi', 'Drilei', 'Encaixei', 'Domino', 'Sei ensinar'];
+const LVL_D = ['assisti e entendi a ideia', 'faço com o parceiro sem resistência', 'já encaixei no rola', 'funciona com frequência no rola', 'explico e corrijo os detalhes'];
+const LVL_S = ['assisti e entendi', 'faço sem resistência', 'já encaixei no rola', 'funciona com frequência', 'explico e corrijo'];
+const REV_DIAS = 7, BOA = 4;
+const mmss = s => s == null || s === '' ? '' : (s >= 3600 ? `${Math.floor(s / 3600)}:${pad(Math.floor(s % 3600 / 60))}:${pad(s % 60)}` : `${pad(Math.floor(s / 60))}:${pad(s % 60)}`);
+const parseT = v => { const m = String(v || '').trim().match(/^(?:(\d{1,2}):)?(\d{1,3}):(\d{2})$/); return m ? (+(m[1] || 0)) * 3600 + (+m[2]) * 60 + (+m[3]) : (/^\d+$/.test(String(v).trim()) ? +v * 60 : null); };
+const normT = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+const cursosL = () => pes('curso').sort((a, b) => (a.v.criado || '') < (b.v.criado || '') ? -1 : 1);
+const cIdOf = ck => ck.slice(6);
+const aulaKey = (ck, aid) => `aula:${cIdOf(ck)}:${aid}`;
+const aSt = (ck, aid) => D.pes[aulaKey(ck, aid)] || {};
+const tecV = id => id ? D.pes['tec:' + id] : null;
+const lvOf = id => n0(tecV(id)?.nivel);
+function aulasDe(c){ let n = 0; const o = []; (c.mods || []).forEach(m => (m.aulas || []).forEach(a => o.push({ a, m, n: ++n }))); return o; }
+function tecUsos(tid){ const o = []; for (const { k, v } of pes('curso')) for (const x of aulasDe(v)) if (x.a.tipo !== 'conc' && x.a.tec === tid) o.push({ ck:k, c:v, ...x }); return o; }
+function cursoTecs(c){ return [...new Set(aulasDe(c).filter(x => x.a.tipo !== 'conc' && x.a.tec && tecV(x.a.tec)).map(x => x.a.tec))]; }
+function diasDesde(d, T){ return d ? Math.round((pd(T) - pd(d)) / 864e5) : null; }
+const quando = n => n == null ? 'sem estudo ainda' : n <= 0 ? 'hoje' : n === 1 ? 'ontem' : `há ${n} dias`;
+const dotsH = (lv, lbl) => `<span class="dots" role="img" aria-label="${lbl || (lv ? 'Nível: ' + LVL[lv - 1] : 'Sem nível')}">${[1,2,3,4,5].map(i => `<i class="${i <= lv ? 'on' : ''}"></i>`).join('')}</span>`;
+function fonteDe(c, m){ return (c.fontes || []).find(f => f.id === m.fonte) || null; }
+function fonteLbl(c, m){
+  const f = fonteDe(c, m), u = f?.url || (m.aulas || []).find(a => a.url)?.url || '';
+  const h = ytId(u) ? 'YouTube' : biliId(u) ? 'Bilibili' : f?.tipo === 'youtube' ? 'YouTube' : f?.tipo === 'bilibili' ? 'Bilibili' : hostOf(u);
+  return [h, m.p ? 'P' + m.p : ''].filter(Boolean).join(' · ');
+}
+function aulaVideo(c, m, a){
+  const url = a.url || fonteDe(c, m)?.url || ''; if (!url) return null;
+  const t = +a.t || 0, y = ytId(url), b = biliId(url), p = m.p;
+  if (y) return { host:'YouTube', open:`https://www.youtube.com/watch?v=${y}${t ? `&t=${t}s` : ''}`, embed:`https://www.youtube-nocookie.com/embed/${y}${t ? `?start=${t}` : ''}` };
+  if (b) { const q = [p ? 'p=' + p : '', t ? 't=' + t : ''].filter(Boolean).join('&'); return { host:'Bilibili', open:`https://www.bilibili.com/video/${b}${q ? '?' + q : ''}`, embed:`https://player.bilibili.com/player.html?bvid=${b}${p ? '&p=' + p : ''}${t ? '&t=' + t : ''}&autoplay=0` }; }
+  return { host:hostOf(url) || 'link', open:url, embed:'' };
+}
+function proxAula(ck, c){ return aulasDe(c).find(x => !aSt(ck, x.a.id).vista) || null; }
+function ultAtiv(ck, c){ let u = c.criado || ''; for (const x of aulasDe(c)){ const e = aSt(ck, x.a.id).em; if (e && e > u) u = e; if (x.a.tec){ const t = tecV(x.a.tec)?.ult; if (t && t > u) u = t; } } return u; }
+function continuar(){
+  let best = null;
+  for (const { k, v } of cursosL()){ const nx = proxAula(k, v); if (!nx) continue; const u = ultAtiv(k, v); if (!best || u > best.u) best = { ck:k, c:v, x:nx, u }; }
+  return best;
+}
+function revisarList(T){
+  const out = [];
+  for (const { k, v } of pes('tec')){
+    const id = k.slice(4), us = tecUsos(id); if (!us.length) continue;
+    const mk = us.find(u => aSt(u.ck, u.a.id).rev), lv = n0(v.nivel), dias = diasDesde(v.ult, T);
+    const sug = lv >= 1 && lv < BOA && dias != null && dias > REV_DIAS;
+    if (mk || sug) out.push({ id, v, lv, dias, marked: !!mk, u: mk || us[0] });
+  }
+  return out.sort((a, b) => (b.marked - a.marked) || ((b.dias || 0) - (a.dias || 0)));
+}
+const precisaRev = (id, T) => { const v = tecV(id); if (!v) return false; const lv = n0(v.nivel), d = diasDesde(v.ult, T); return lv >= 1 && lv < BOA && d != null && d > REV_DIAS; };
+function guessTipo(t){ return /princ[ií]pio|conceito|introdu|^intro\b|vis[aã]o geral|conclus|resumo|teoria/i.test(t) ? 'conc' : 'tec'; }
+
+/* ---------- Índice do instrucional → módulos e aulas ---------- */
+function parseIndice(txt){
+  const TS = /^(?:(\d{1,2}):)?(\d{1,3}):(\d{2})\b\s*[-–—.:)|]?\s*(.*)$/, PART = /^P\s*(\d{1,3})\b\s*[-–—.:)|]?\s*(.*)$/i, TSE = /^(.*?)\s*[-–—(|]?\s*(?:\d{1,2}:)?\d{1,3}:\d{2}\)?$/;
+  const lines = String(txt || '').split(/\r?\n/).map(l => l.replace(/^[\s\-–•*·]+/, '').trim()).filter(Boolean);
+  const hasTS = lines.some(l => { const m = l.match(TS); return m && m[4]; });
+  const mods = []; let cur = null;
+  const add = (titulo, t) => { if (!cur){ cur = { id:uid(), nome:'Aulas', p:null, aulas:[], _t:'' }; mods.push(cur); } cur.aulas.push({ id:uid(), titulo:titulo.slice(0, 120), t }); };
+  for (const l of lines){
+    let m;
+    if ((m = l.match(PART))){ let r = m[2].trim(); const e = r.match(TSE); if (e) r = e[1].trim(); cur = { id:uid(), nome:'', p:+m[1], aulas:[], _t:r }; mods.push(cur); continue; }
+    if ((m = l.match(TS))){ if (m[4]) add(m[4], (+(m[1] || 0)) * 3600 + (+m[2]) * 60 + (+m[3])); continue; }
+    if (cur && cur.p && !cur._t && !cur.aulas.length){ cur._t = l.slice(0, 80); continue; }
+    if (!hasTS) add(l, null);
+  }
+  mods.forEach(m => {
+    if (m.p) m.nome = `Parte ${m.p}${m._t ? ' · ' + m._t : ''}`;
+    if (!m.aulas.length) m.aulas.push({ id:uid(), titulo:m._t || m.nome, t:m.p ? 0 : null });
+    delete m._t;
+    m.aulas.forEach((a, i) => { const nx = m.aulas[i + 1]; a.dur = a.t != null && nx && nx.t != null && nx.t > a.t ? nx.t - a.t : null; });
+  });
+  return mods;
+}
+function recalcDur(m){ (m.aulas || []).forEach((a, i) => { const nx = m.aulas[i + 1]; a.dur = a.t != null && nx && nx.t != null && nx.t > a.t ? nx.t - a.t : null; }); }
+
+/* ---------- Telas ---------- */
+function viewCursos(T){
+  const cs = cursosL(), ct = continuar(), rv = revisarList(T);
+  let h = '';
+  if (ct){
+    const { ck, c, x } = ct;
+    h += `<section class="sec"><div class="sec-h"><h3>Continuar estudando</h3><span class="muted tiny">${esc(c.nome)}</span></div>
+      <p class="ctit">${esc(x.a.titulo)}</p><p class="d small muted">${esc(x.m.nome)} · Aula ${x.n}${x.a.t ? ' · começa em ' + mmss(x.a.t) : ''}</p>
+      <button class="btn dark wide" data-action="aula-open" data-ck="${ck}" data-a="${x.a.id}">▶ Continuar</button></section>`;
+  }
+  if (rv.length){
+    h += `<section class="sec"><div class="sec-h"><h3>Para revisar</h3><span class="muted tiny">${rv.length}</span></div>${rv.slice(0, 5).map(r => `<div class="row"><button class="rowbtn" data-action="aula-open" data-ck="${r.u.ck}" data-a="${r.u.a.id}"><span class="t">${esc(r.v.nome)}</span><br><span class="d">${dotsH(r.lv)} ${r.lv ? LVL[r.lv - 1] : 'a estudar'} · ${r.marked ? 'você marcou' : 'vista ' + quando(r.dias)}</span></button><button class="btn" data-action="aula-open" data-ck="${r.u.ck}" data-a="${r.u.a.id}">Revisar</button></div>`).join('')}${rv.length > 5 ? `<button class="link" data-action="tec-all">Ver todas (${rv.length})</button>` : ''}</section>`;
+  }
+  h += `<section class="sec"><div class="sec-h"><h3>Meus cursos</h3>${cs.length ? `<span class="muted tiny">${plural(cs.length, 'curso', 'cursos')}</span>` : ''}</div>`;
+  if (!cs.length) h += `<p class="empty">Monte um curso a partir do índice de um instrucional: a lista de partes do Bilibili ou os capítulos do YouTube. Cada aula vira uma técnica com o seu nível de domínio.</p>`;
+  h += cs.map(({ k, v }) => { const tc = cursoTecs(v), boa = tc.filter(id => lvOf(id) >= BOA).length, nf = (v.fontes || []).length, na = aulasDe(v).length;
+    return `<button class="crow" data-action="curso-open" data-ck="${k}"><span class="crow-h"><span class="t">${esc(v.nome)}</span><span class="d">${plural(nf, 'fonte', 'fontes')} · ${plural(na, 'aula', 'aulas')}</span></span>
+      <span class="meter sm"><i style="width:${tc.length ? boa / tc.length * 100 : 0}%"></i></span><span class="d">${tc.length ? `${boa} de ${plural(tc.length, 'técnica', 'técnicas')} com boa base (Domino ou mais)` : 'sem técnicas ainda'}</span></button>`; }).join('');
+  h += `<div class="actions"><button class="btn dark" data-action="curso-novo">Novo curso</button>${pes('tec').length ? '<button class="btn" data-action="tec-all">Todas as técnicas</button>' : ''}</div></section>`;
+  return h;
+}
+function viewCurso(ck, T){
+  const c = D.pes[ck]; if (!c){ UI.curso = null; return viewCursos(T); }
+  const al = aulasDe(c), tc = cursoTecs(c), boa = tc.filter(id => lvOf(id) >= BOA).length, vistas = al.filter(x => aSt(ck, x.a.id).vista).length, nx = proxAula(ck, c);
+  let h = `<div class="subbar"><button class="link" data-action="curso-back">‹ Cursos</button><button class="link" data-action="modal" data-t="curso-edit" data-k="${ck}">Editar</button></div>
+    <h2 class="ptitle">${esc(c.nome)}</h2><p class="muted small">${plural((c.fontes || []).length, 'fonte', 'fontes')} · ${plural(al.length, 'aula', 'aulas')} · ${plural(tc.length, 'técnica', 'técnicas')}</p>
+    <section class="sec"><div class="sec-h"><h3>Domínio</h3><span class="muted tiny">${vistas} de ${plural(al.length, 'aula vista', 'aulas vistas')}</span></div>
+    <div class="hero"><span class="mid">${boa} de ${tc.length}</span><span class="of">técnicas com boa base</span></div>
+    <div class="meter"><i style="width:${tc.length ? boa / tc.length * 100 : 0}%"></i></div>
+    ${nx ? `<button class="btn dark wide" data-action="aula-open" data-ck="${ck}" data-a="${nx.a.id}">▶ Continuar: Aula ${nx.n}</button>` : al.length ? '<p class="sub good-t">Todas as aulas vistas.</p>' : '<p class="sub">Sem aulas ainda. Toque em Editar para criar.</p>'}</section>`;
+  for (const m of c.mods || []){
+    h += `<section class="sec"><div class="sec-h"><h3>${esc(m.nome)}</h3><span class="muted tiny">${esc(fonteLbl(c, m))}</span></div>`;
+    h += al.filter(x => x.m === m).map(x => {
+      const st = aSt(ck, x.a.id), cur = nx && nx.a.id === x.a.id, conc = x.a.tipo === 'conc', lv = conc ? 0 : lvOf(x.a.tec);
+      const outros = conc || !x.a.tec ? [] : [...new Set(tecUsos(x.a.tec).filter(u => u.ck !== ck).map(u => u.c.nome))];
+      const ic = st.vista ? '<span class="aic ok" aria-label="vista">✓</span>' : cur ? '<span class="aic cur" aria-label="próxima">▶</span>' : '<span class="aic" aria-label="não vista"></span>';
+      const right = conc ? '<span class="d">conceito</span>' : `${dotsH(lv)}<span class="d">${lv ? LVL[lv - 1] : 'a estudar'}</span>`;
+      return `<button class="arow ${cur ? 'cur' : ''}" data-action="aula-open" data-ck="${ck}" data-a="${x.a.id}">${ic}<span class="grow"><span class="t">${x.n} · ${esc(x.a.titulo)}</span><span class="d">${[x.a.t != null ? mmss(x.a.t) : '', x.a.dur ? Math.round(x.a.dur / 60) + ' min' : ''].filter(Boolean).join(' · ')}${st.rev ? ' · <span class="revtag">revisar</span>' : ''}</span>${outros.length ? `<span class="also">também no curso ${esc(outros.join(', '))}</span>` : ''}</span><span class="aright">${right}</span></button>`;
+    }).join('') || '<p class="empty">Nenhuma aula neste módulo.</p>';
+    h += `</section>`;
+  }
+  return h;
+}
+function viewAula(ck, aid, T){
+  const c = D.pes[ck], al = c ? aulasDe(c) : [], i = al.findIndex(x => x.a.id === aid);
+  if (i < 0){ UI.aula = null; return viewCurso(ck, T); }
+  const { a, m, n } = al[i], st = aSt(ck, aid), conc = a.tipo === 'conc', tid = conc ? null : a.tec, tv = tecV(tid), lv = n0(tv?.nivel);
+  const vd = aulaVideo(c, m, a), pk = 'aula:' + aid, ak = aulaKey(ck, aid), rv = !!st.rev || (tid && precisaRev(tid, T)), nxt = al[i + 1];
+  const ta = (f, ph) => `<textarea data-ak="${ak}" data-f="${f}" rows="${Math.max(2, rowsFor(st[f] || ''))}" placeholder="${ph}">${esc(st[f] || '')}</textarea>`;
+  let h = `<div class="subbar"><button class="link" data-action="aula-back">‹ ${esc(c.nome)}</button><span class="muted tiny">Aula ${n} de ${al.length}</span></div>
+    <h2 class="ptitle">${esc(a.titulo)}</h2><p class="muted small">${esc(m.nome)}${fonteLbl(c, m) ? ' · ' + esc(fonteLbl(c, m)) : ''}</p>`;
+  if (vd){
+    h += UI.play === pk && vd.embed ? `<div class="yt big"><iframe src="${esc(vd.embed)}" title="Vídeo da aula" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`
+      : `<button class="vbox" ${vd.embed ? `data-action="play" data-pk="${pk}"` : `data-action="open-url" data-u="${esc(vd.open)}"`}><span class="vplay">▶</span><span>Vídeo do ${esc(vd.host)}${a.t ? ' · começa em ' + mmss(a.t) : ''}</span></button>`;
+    h += `<div class="vlinks"><a class="lk" href="${esc(vd.open)}" target="_blank" rel="noopener">Abrir no ${esc(vd.host)} ›</a>${UI.play === pk ? `<button class="link" data-action="play" data-pk="${pk}">Fechar vídeo</button>` : ''}</div>`;
+  } else h += `<p class="note">Sem link de vídeo. Adicione o link da fonte em Editar.</p>`;
+  h += `<div class="seg2 big"><button data-action="aula-vista" data-ck="${ck}" data-a="${aid}" class="${st.vista ? 'present' : ''}" aria-pressed="${!!st.vista}">${st.vista ? '✓ Vista' : 'Marcar como vista'}</button><button data-action="aula-rev" data-ck="${ck}" data-a="${aid}" aria-pressed="${!!st.rev}" class="${st.rev ? 'on' : ''}">${rv ? 'Revisei' : 'Revisar depois'}</button></div>`;
+  if (rv) h += `<p class="note" style="margin:6px 2px 0">${st.rev ? 'Você marcou para revisar.' : `Sem estudar há mais de ${REV_DIAS} dias: o app sugere revisar.`} Depois de rever, toque em Revisei.</p>`;
+  if (tid && tv){
+    const nUsos = new Set(tecUsos(tid).map(u => u.ck)).size;
+    h += `<section class="sec"><div class="sec-h"><h3>Domínio da técnica</h3><span class="muted tiny">em ${plural(nUsos, 'curso', 'cursos')}</span></div>
+      <div class="lvl" role="radiogroup" aria-label="Nível de domínio">${LVL.map((l, j) => `<button role="radio" aria-checked="${lv === j + 1}" class="${lv === j + 1 ? 'on' : lv > j + 1 ? 'past' : ''}" data-action="nivel" data-tec="${tid}" data-v="${j + 1}"><i></i><span>${l}</span></button>`).join('')}</div>
+      <p class="note">${lv ? `Agora: <b>${LVL[lv - 1]}</b>, ${LVL_D[lv - 1]}.${lv < 5 ? ` Próximo: <b>${LVL[lv]}</b>, ${LVL_D[lv]}.` : ''}` : `Ainda sem nível. Quando assistir e entender, marque <b>Vi</b>.`}</p></section>`;
+  } else if (conc) h += `<p class="note" style="margin:14px 2px 0">Aula de conceito: não tem nível de domínio.</p>`;
+  h += `<section class="sec"><div class="sec-h"><h3>Estudo da aula</h3></div>
+    <label class="lbl">O que observar</label>${ta('obs', 'Detalhes para prestar atenção no vídeo')}
+    <div class="lblrow"><label class="lbl">Minhas anotações</label>${IOS ? `<button class="btn sm" data-action="aula-voz" data-ck="${ck}" data-a="${aid}"><i class="rec-dot"></i>Gravar por voz</button>` : ''}</div>${ta('notas', 'O que entendi, dúvidas, o que funcionou')}
+    <label class="lbl">Drilar</label>${ta('drill', 'Ex.: 3 × 10 de cada lado, com parceiro')}
+    <label class="lbl">Testar no rola</label>${ta('teste', 'Ex.: tentar 2 vezes partindo da guarda fechada')}</section>`;
+  if (nxt) h += `<button class="nextbar" data-action="aula-open" data-ck="${ck}" data-a="${nxt.a.id}"><span>Próxima: ${esc(nxt.a.titulo)}</span><span>›</span></button>`;
+  return h;
+}
+function tecRows(list, T){
+  return list.map(t => { const us = tecUsos(t.id), cs = [...new Set(us.map(u => u.c.nome))], d = diasDesde(t.v.ult, T), rev = precisaRev(t.id, T) || us.some(u => aSt(u.ck, u.a.id).rev);
+    return `<button class="arow" data-action="aula-open" data-ck="${us[0].ck}" data-a="${us[0].a.id}"><span class="grow"><span class="t">${esc(t.v.nome)}${rev ? ' <span class="revtag">revisar</span>' : ''}</span><span class="d">${cs.length > 1 ? plural(cs.length, 'curso', 'cursos') : esc(cs[0])} · ${quando(d)}</span></span><span class="aright">${dotsH(t.lv)}</span></button>`; }).join('');
+}
+function todasList(T){
+  const q = normT(UI.tecQ), all = pes('tec').map(({ k, v }) => ({ id:k.slice(4), v, lv:n0(v.nivel) })).filter(t => tecUsos(t.id).length);
+  const list = all.filter(t => !q || normT(t.v.nome).includes(q)).sort((a, b) => String(a.v.nome).localeCompare(String(b.v.nome), 'pt'));
+  if (!list.length) return `<p class="empty">${all.length ? 'Nenhuma técnica com esse nome.' : 'Nenhuma técnica ainda.'}</p>`;
+  if (UI.tecBy === 'curso') return cursosL().map(({ k, v }) => { const ids = new Set(cursoTecs(v)), l = list.filter(t => ids.has(t.id)); return l.length ? `<section class="sec"><div class="sec-h"><h3>${esc(v.nome)}</h3><span class="muted tiny">${l.length}</span></div>${tecRows(l, T)}</section>` : ''; }).join('');
+  return [5, 4, 3, 2, 1, 0].map(lv => { const l = list.filter(t => t.lv === lv); return l.length ? `<section class="sec"><div class="sec-h"><h3>${lv ? LVL[lv - 1] : 'A estudar'} <span class="muted tiny">${l.length}</span></h3><span class="muted tiny">${lv ? LVL_S[lv - 1] : 'ainda sem nível'}</span></div>${tecRows(l, T)}</section>` : ''; }).join('');
+}
+function viewTodasTec(T){
+  const all = pes('tec').map(({ k, v }) => ({ id:k.slice(4), lv:n0(v.nivel) })).filter(t => tecUsos(t.id).length);
+  const cs = cursosL().filter(({ v }) => cursoTecs(v).length).length, boa = all.filter(t => t.lv >= BOA).length;
+  return `<div class="subbar"><button class="link" data-action="tec-back">‹ Cursos</button><span></span></div>
+    <h2 class="ptitle">Todas as técnicas</h2><p class="muted small">${plural(all.length, 'técnica', 'técnicas')} em ${plural(cs, 'curso', 'cursos')} · ${boa} com boa base</p>
+    <section class="sec"><div class="lvtiles">${LVL.map((l, j) => `<div><b>${all.filter(t => t.lv === j + 1).length}</b>${dotsH(j + 1, l)}<span>${l}</span></div>`).join('')}</div></section>
+    <div class="tecbar"><label class="search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><input type="search" id="tecQ" placeholder="Buscar técnica" aria-label="Buscar técnica" value="${esc(UI.tecQ || '')}"></label>
+      <div class="seg mini">${[['nivel', 'Nível'], ['curso', 'Curso']].map(([k, l]) => `<button data-action="tec-by" data-v="${k}" aria-pressed="${(UI.tecBy || 'nivel') === k}">${l}</button>`).join('')}</div></div>
+    <div id="tecList">${todasList(T)}</div>`;
+}
+function estudoCard(T){
+  const ct = continuar(); if (!ct) return '';
+  const { ck, c, x } = ct;
+  return `<section class="sec"><div class="sec-h"><h3>Estudo</h3><span class="muted tiny">${esc(c.nome)}</span></div><div class="nextw"><button class="rowbtn" data-action="aula-open" data-ck="${ck}" data-a="${x.a.id}"><span class="t">${esc(x.a.titulo)}</span><br><span class="d">Próxima: Aula ${x.n}${x.a.t ? ' · começa em ' + mmss(x.a.t) : ''}</span></button><button class="btn dark" data-action="aula-open" data-ck="${ck}" data-a="${x.a.id}">Continuar</button></div></section>`;
+}
+
+/* ---------- Montar curso (novo ou outra fonte) ---------- */
+const novaFonte = () => ({ tipo:'bilibili', url:'', txt:'', titulo:'' });
+function novoParsed(){
+  const n = UI.novo; return n.fontes.map((f, fi) => f.tipo === 'solto' ? (f.url.trim() ? [{ id:'x', nome:'Vídeos extras', p:null, aulas:[{ id:'x', titulo:f.titulo.trim() || 'Vídeo', t:0, dur:null }] }] : []) : parseIndice(f.txt));
+}
+function novoTec(key, titulo){ const o = UI.novo.ov[key] || {}; return 'tec' in o ? o.tec : matchTec(titulo); }
+function matchTec(titulo){ const n = normT(titulo); if (!n) return null; const t = pes('tec').find(x => normT(x.v.nome) === n && tecUsos(x.k.slice(4)).length); return t ? t.k.slice(4) : null; }
+function tecSelect(attr, sel, titulo){
+  const ts = pes('tec').filter(x => tecUsos(x.k.slice(4)).length).sort(byName);
+  return `<select ${attr} aria-label="Técnica ligada a esta aula"><option value="">Técnica nova${titulo ? ': ' + esc(titulo.slice(0, 40)) : ''}</option>${ts.map(x => `<option value="${x.k.slice(4)}" ${sel === x.k.slice(4) ? 'selected' : ''}>${esc(x.v.nome)}</option>`).join('')}</select>`;
+}
+function novoPreview(){
+  const ps = novoParsed(), nm = ps.reduce((s, m) => s + m.length, 0), na = ps.reduce((s, m) => s + m.reduce((t, x) => t + x.aulas.length, 0), 0);
+  if (!na) return `<p class="note">Cole a lista no campo acima. Linhas com P1, P2… viram módulos; linhas com minuto viram aulas.</p>`;
+  let h = `<div class="sec-h"><h3>O app entendeu</h3><span class="muted tiny">${plural(nm, 'módulo', 'módulos')} · ${plural(na, 'aula', 'aulas')}</span></div>`;
+  ps.forEach((ms, fi) => ms.forEach((m, mi) => {
+    h += `<p class="pmod">${esc(m.nome)}</p>`;
+    m.aulas.forEach((a, ai) => {
+      const key = `${fi}.${mi}.${ai}`, o = UI.novo.ov[key] || {}, tipo = o.tipo || guessTipo(a.titulo), tid = tipo === 'tec' ? novoTec(key, a.titulo) : null, tv = tecV(tid);
+      const outro = tid ? [...new Set(tecUsos(tid).map(u => u.c.nome))].join(', ') : '';
+      h += `<div class="prow"><div class="t">${a.t != null ? `<span class="muted">${mmss(a.t)}</span> · ` : ''}${esc(a.titulo)}</div>
+        <div class="prow-b"><span class="d">${tipo === 'conc' ? 'Conceito: sem nível' : tv ? `<span class="good-t" style="color:var(--accent)">Ligada a "${esc(tv.nome)}"${outro ? ', do curso ' + esc(outro) : ''}</span>` : 'Técnica nova'}</span>
+        <span class="mseg"><button data-action="nv-tipo-aula" data-key="${key}" data-v="tec" aria-pressed="${tipo === 'tec'}">Técnica</button><button data-action="nv-tipo-aula" data-key="${key}" data-v="conc" aria-pressed="${tipo === 'conc'}">Conceito</button></span></div>
+        ${tipo === 'tec' && pes('tec').length ? `<div class="prow-l">${tecSelect(`data-nvlink="${key}"`, tid, a.titulo)}</div>` : ''}</div>`;
+    });
+  }));
+  return h;
+}
+function novoSheet(){
+  const n = UI.novo; if (!n) return '';
+  const c = n.k ? D.pes[n.k] : null;
+  return sheetWrap('Novo curso', `${sheetHead(`<div style="flex:1"><h2>${c ? 'Outra fonte' : 'Novo curso'}</h2>${c ? `<p class="muted small">${esc(c.nome)}</p>` : ''}</div>`)}
+    ${c ? '' : `<label class="lbl">Assunto do curso<input type="text" data-nv="nome" maxlength="60" value="${esc(n.nome)}" placeholder="Ex.: Armlock"></label>`}
+    ${n.fontes.map((f, fi) => `<div class="fbox"><div class="sec-h"><h3>Fonte ${(c ? (c.fontes || []).length : 0) + fi + 1}</h3>${n.fontes.length > 1 ? `<button class="xbtn" data-action="nv-del-fonte" data-fi="${fi}" aria-label="Remover fonte">×</button>` : ''}</div>
+      <div class="chips">${[['youtube', 'YouTube'], ['bilibili', 'Bilibili'], ['solto', 'Vídeo solto']].map(([k, l]) => `<button class="chip ${f.tipo === k ? 'on' : ''}" data-action="nv-fonte-tipo" data-fi="${fi}" data-v="${k}">${l}</button>`).join('')}</div>
+      <label class="lbl">Link<input type="url" inputmode="url" autocapitalize="off" data-nv="fontes.${fi}.url" value="${esc(f.url)}" placeholder="${f.tipo === 'bilibili' ? 'bilibili.com/video/BV…' : 'youtube.com/watch?v=…'}"></label>
+      ${f.tipo === 'solto' ? `<label class="lbl">Título do vídeo<input type="text" data-nv="fontes.${fi}.titulo" maxlength="120" value="${esc(f.titulo)}" placeholder="Ex.: Armlock da montada"></label>`
+        : `<label class="lbl">Cole a lista de partes ou de capítulos<textarea class="mono" data-nv="fontes.${fi}.txt" rows="6" placeholder="P1 Fundamentos&#10;00:00 Princípios do armlock&#10;09:10 Controle do braço">${esc(f.txt)}</textarea></label>
+          <p class="note">Linhas com P1, P2… viram módulos. Linhas com minuto viram aulas. Sem índice? Crie as aulas à mão depois, em Editar.</p>`}</div>`).join('')}
+    <div id="nvPrev" class="fbox">${novoPreview()}</div>
+    <div class="actions"><button class="btn" data-action="nv-add-fonte">+ Outra fonte</button><button class="btn dark" data-action="nv-criar">${c ? 'Adicionar ao curso' : 'Criar curso'}</button></div>`);
+}
+function novoCriar(T){
+  const n = UI.novo, c0 = n.k ? D.pes[n.k] : null, nome = c0 ? c0.nome : n.nome.trim();
+  if (!nome){ toast('Dê um nome ao curso'); return false; }
+  const ps = novoParsed(), fontes = [], mods = [], novos = {};
+  n.fontes.forEach((f, fi) => {
+    const url = normUrl(f.url), ms = ps[fi];
+    if (f.tipo === 'solto'){ if (!url) return; const fid = uid(); fontes.push({ id:fid, tipo:'solto', url }); mods.push({ id:uid(), nome:'Vídeos extras', fonte:fid, p:null, aulas:[{ id:uid(), titulo:f.titulo.trim() || 'Vídeo', t:0, dur:null, url, tipo:'tec', _k:`${fi}.0.0` }] }); return; }
+    if (!ms.length && !url) return;
+    const fid = uid(); fontes.push({ id:fid, tipo:f.tipo, url });
+    (ms.length ? ms : [{ id:uid(), nome:'Aulas', p:null, aulas:[] }]).forEach((m, mi) => { m.fonte = fid; m.aulas.forEach((a, ai) => { a._k = `${fi}.${mi}.${ai}`; }); mods.push(m); });
+  });
+  if (!mods.length){ toast('Cole a lista de aulas ou o link de um vídeo'); return false; }
+  for (const m of mods) for (const a of m.aulas){
+    const o = n.ov[a._k] || {}; a.tipo = o.tipo || guessTipo(a.titulo); a.id = uid();
+    if (a.tipo === 'tec'){ let tid = novoTec(a._k, a.titulo); if (!tid){ const nk = normT(a.titulo); tid = novos[nk] || (novos[nk] = uid()); if (!D.pes['tec:' + tid]){ D.pes['tec:' + tid] = { nome:a.titulo, nivel:0 }; savePes('tec:' + tid); } } a.tec = tid; } else a.tec = null;
+    delete a._k;
+  }
+  let ck;
+  if (c0){ ck = n.k; c0.fontes = [...(c0.fontes || []), ...fontes]; const ex = (c0.mods || []).find(m => m.nome === 'Vídeos extras');
+    for (const m of mods){ if (m.nome === 'Vídeos extras' && ex){ ex.aulas.push(...m.aulas); } else (c0.mods = c0.mods || []).push(m); } }
+  else { ck = 'curso:' + uid(); const ex = mods.filter(m => m.nome === 'Vídeos extras'), rest = mods.filter(m => m.nome !== 'Vídeos extras'); if (ex.length > 1){ ex[0].aulas = ex.flatMap(m => m.aulas); } D.pes[ck] = { nome, criado:T, fontes, mods:[...rest, ...(ex.length ? [ex[0]] : [])] }; }
+  savePes(ck); UI.novo = null; UI.modal = null; UI.tab = 'est'; UI.estTab = 'cursos'; UI.curso = ck; UI.aula = null; UI.tecAll = false; scrollTo(0, 0);
+  toast(c0 ? 'Fonte adicionada' : 'Curso criado'); return true;
+}
+
+/* ---------- Editar curso ---------- */
+function editSheet(k){
+  const e = UI.ced; if (!e || e.k !== k) return '';
+  const c = e.c;
+  return sheetWrap('Editar curso', `${sheetHead('<h2 style="flex:1">Editar curso</h2>')}
+    <label class="lbl">Nome do curso<input type="text" data-ce="nome" maxlength="60" value="${esc(c.nome)}"></label>
+    ${(c.mods || []).map((m, mi) => `<div class="fbox"><div class="other" style="margin-top:0"><input type="text" data-ce="mods.${mi}.nome" maxlength="80" value="${esc(m.nome)}" aria-label="Nome do módulo"><button class="xbtn" data-action="ce-del-mod" data-mi="${mi}" aria-label="Apagar módulo">×</button></div>
+      ${(m.aulas || []).map((a, ai) => `<div class="erow"><div class="erow-a"><input type="text" class="tt" data-ce="mods.${mi}.aulas.${ai}.tt" inputmode="numeric" value="${esc(a.tt ?? '')}" placeholder="mm:ss" aria-label="Minuto de início"><input type="text" data-ce="mods.${mi}.aulas.${ai}.titulo" maxlength="120" value="${esc(a.titulo)}" aria-label="Título da aula"><button class="xbtn" data-action="ce-del-aula" data-mi="${mi}" data-ai="${ai}" aria-label="Apagar aula">×</button></div>
+        <div class="erow-b"><span class="mseg"><button data-action="ce-tipo" data-mi="${mi}" data-ai="${ai}" data-v="tec" aria-pressed="${a.tipo !== 'conc'}">Técnica</button><button data-action="ce-tipo" data-mi="${mi}" data-ai="${ai}" data-v="conc" aria-pressed="${a.tipo === 'conc'}">Conceito</button></span>${a.tipo !== 'conc' ? tecSelect(`data-celink="${mi}.${ai}"`, a.tec, a.titulo) : ''}</div></div>`).join('')}
+      <button class="btn sm" data-action="ce-add-aula" data-mi="${mi}">+ Aula</button></div>`).join('')}
+    <div class="actions"><button class="btn sm" data-action="ce-add-mod">+ Módulo</button><button class="btn sm" data-action="ce-fonte">+ Outra fonte</button></div>
+    <div class="actions"><button class="btn dark" style="flex:1;justify-content:center" data-action="ce-save">Salvar</button></div>
+    <div class="actions"><button class="btn sm danger" data-action="ce-apagar">Apagar este curso</button></div>`);
+}
+function ceSave(T){
+  const e = UI.ced, c = e.c, ck = e.k, old = D.pes[ck]; if (!old) return false;
+  if (!String(c.nome || '').trim()){ toast('Dê um nome ao curso'); return false; }
+  const novos = {};
+  for (const m of c.mods || []){
+    m.nome = String(m.nome || '').trim() || 'Módulo';
+    m.aulas = (m.aulas || []).filter(a => String(a.titulo || '').trim());
+    for (const a of m.aulas){
+      a.titulo = a.titulo.trim(); a.t = String(a.tt ?? '').trim() === '' ? null : parseT(a.tt); delete a.tt;
+      if (a.tipo === 'conc') a.tec = null;
+      else { a.tipo = 'tec'; if (!a.tec || !D.pes['tec:' + a.tec]){ const t0 = matchTec(a.titulo); const nk = normT(a.titulo); a.tec = t0 || novos[nk] || (novos[nk] = uid()); if (!D.pes['tec:' + a.tec]){ D.pes['tec:' + a.tec] = { nome:a.titulo, nivel:0 }; savePes('tec:' + a.tec); } } }
+    }
+    recalcDur(m);
+  }
+  for (const x of aulasDe(c)){ const tv = tecV(x.a.tec); if (tv && tv.nome !== x.a.titulo && tecUsos(x.a.tec).length <= 1 && aulasDe(c).filter(y => y.a.tec === x.a.tec).length === 1){ tv.nome = x.a.titulo; savePes('tec:' + x.a.tec); } }
+  const ids = new Set(aulasDe(c).map(x => x.a.id));
+  for (const x of aulasDe(old)) if (!ids.has(x.a.id) && D.pes[aulaKey(ck, x.a.id)]){ delete D.pes[aulaKey(ck, x.a.id)]; savePes(aulaKey(ck, x.a.id)); }
+  c.nome = c.nome.trim(); D.pes[ck] = c; savePes(ck); limparTecs(); UI.ced = null; UI.modal = null; toast('Curso salvo'); return true;
+}
+function limparTecs(){ for (const { k } of pes('tec')) if (!tecUsos(k.slice(4)).length){ delete D.pes[k]; savePes(k); } }
+function editOpen(ck){ const c = JSON.parse(JSON.stringify(D.pes[ck])); (c.mods || []).forEach(m => (m.aulas || []).forEach(a => { a.tt = a.t != null ? mmss(a.t) : ''; })); UI.ced = { k:ck, c }; }
+
+/* ---------- Ações ---------- */
+function p2Action(a, el, T){
+  const ck = el.dataset.ck, aid = el.dataset.a;
+  switch (a){
+    case 'aula-open': UI.tab = 'est'; UI.estTab = 'cursos'; UI.curso = ck; UI.aula = aid; UI.tecAll = false; UI.play = null; UI.modal = null; scrollTo(0, 0); return true;
+    case 'curso-open': UI.curso = ck; UI.aula = null; UI.tecAll = false; UI.play = null; scrollTo(0, 0); return true;
+    case 'curso-back': UI.curso = null; UI.aula = null; UI.play = null; scrollTo(0, 0); return true;
+    case 'aula-back': UI.aula = null; UI.play = null; scrollTo(0, 0); return true;
+    case 'tec-all': UI.tecAll = true; UI.curso = null; UI.aula = null; scrollTo(0, 0); return true;
+    case 'tec-back': UI.tecAll = false; UI.tecQ = ''; scrollTo(0, 0); return true;
+    case 'tec-by': UI.tecBy = el.dataset.v; return true;
+    case 'open-url': window.open(el.dataset.u, '_blank', 'noopener'); return false;
+    case 'aula-vista': { const k = aulaKey(ck, aid), s = { ...(D.pes[k] || {}) }, x = aulasDe(D.pes[ck]).find(y => y.a.id === aid);
+      s.vista = !s.vista; if (s.vista){ s.em = T; s.rev = false; } else delete s.em;
+      D.pes[k] = s; savePes(k);
+      const tid = x && x.a.tipo !== 'conc' ? x.a.tec : null, tv = tecV(tid);
+      if (tv && s.vista){ tv.ult = T; if (!n0(tv.nivel)) tv.nivel = 1; savePes('tec:' + tid); }
+      if (s.vista) toast(tv && n0(tv.nivel) === 1 ? 'Aula vista · nível Vi' : 'Aula vista'); return true; }
+    case 'aula-rev': { const k = aulaKey(ck, aid), s = { ...(D.pes[k] || {}) }, x = aulasDe(D.pes[ck]).find(y => y.a.id === aid), tid = x && x.a.tipo !== 'conc' ? x.a.tec : null;
+      const rv = !!s.rev || (tid && precisaRev(tid, T));
+      if (rv){ s.rev = false; if (!s.vista){ s.vista = true; s.em = T; } const tv = tecV(tid); if (tv){ tv.ult = T; savePes('tec:' + tid); } toast('Revisão registrada'); }
+      else { s.rev = true; toast('Marcada para revisar'); }
+      D.pes[k] = s; savePes(k); return true; }
+    case 'nivel': { const tid = el.dataset.tec, tv = tecV(tid), v = +el.dataset.v; if (!tv || n0(tv.nivel) === v) return false; tv.nivel = v; tv.ult = T; tv.em = T; savePes('tec:' + tid); return true; }
+    case 'aula-voz': document.activeElement?.blur?.(); runShortcut('Nota de estudo', cIdOf(ck) + ':' + aid); return false;
+    case 'curso-novo': UI.novo = { k:null, nome:'', fontes:[novaFonte()], ov:{} }; UI.modal = { t:'curso-novo', k:'novo' }; return true;
+    case 'nv-fonte-tipo': UI.novo.fontes[+el.dataset.fi].tipo = el.dataset.v; UI.novo.ov = {}; return true;
+    case 'nv-add-fonte': UI.novo.fontes.push(novaFonte()); return true;
+    case 'nv-del-fonte': UI.novo.fontes.splice(+el.dataset.fi, 1); UI.novo.ov = {}; return true;
+    case 'nv-tipo-aula': (UI.novo.ov[el.dataset.key] ??= {}).tipo = el.dataset.v; return true;
+    case 'nv-criar': return novoCriar(T);
+    case 'ce-tipo': { const x = UI.ced.c.mods[+el.dataset.mi].aulas[+el.dataset.ai]; x.tipo = el.dataset.v; if (x.tipo === 'tec' && !x.tec) x.tec = matchTec(x.titulo); return true; }
+    case 'ce-add-aula': UI.ced.c.mods[+el.dataset.mi].aulas.push({ id:uid(), titulo:'', tt:'', tipo:'tec', tec:null }); return true;
+    case 'ce-del-aula': UI.ced.c.mods[+el.dataset.mi].aulas.splice(+el.dataset.ai, 1); return true;
+    case 'ce-add-mod': UI.ced.c.mods = [...(UI.ced.c.mods || []), { id:uid(), nome:'Módulo ' + ((UI.ced.c.mods || []).length + 1), fonte:null, p:null, aulas:[] }]; return true;
+    case 'ce-del-mod': { const m = UI.ced.c.mods[+el.dataset.mi]; if ((m.aulas || []).length && !confirm(`Apagar o módulo "${m.nome}" e as suas ${m.aulas.length} aulas?`)) return false; UI.ced.c.mods.splice(+el.dataset.mi, 1); return true; }
+    case 'ce-save': return ceSave(T);
+    case 'ce-fonte': { const k = UI.ced.k; if (!ceSave(T)) return false; UI.novo = { k, nome:'', fontes:[novaFonte()], ov:{} }; UI.modal = { t:'curso-novo', k:'novo' }; return true; }
+    case 'ce-apagar': { const k = UI.ced.k, c = D.pes[k]; if (!confirm(`Apagar o curso "${c.nome}"? As aulas vistas e as anotações dele também serão apagadas.`)) return false;
+      for (const x of aulasDe(c)) if (D.pes[aulaKey(k, x.a.id)]){ delete D.pes[aulaKey(k, x.a.id)]; savePes(aulaKey(k, x.a.id)); }
+      delete D.pes[k]; savePes(k); limparTecs(); UI.ced = null; UI.modal = null; UI.curso = null; UI.aula = null; toast('Curso apagado'); return true; }
+  }
+  return null;
+}
+function p2Change(el){
+  if (el.dataset?.ak){ const k = el.dataset.ak, s = { ...(D.pes[k] || {}) }; s[el.dataset.f] = el.value.trim() ? el.value : ''; D.pes[k] = s; savePes(k); return true; }
+  if (el.dataset?.nvlink != null && UI.novo){ (UI.novo.ov[el.dataset.nvlink] ??= {}).tec = el.value || null; const p = document.getElementById('nvPrev'); if (p) p.innerHTML = novoPreview(); return true; }
+  if (el.dataset?.celink != null && UI.ced){ const [mi, ai] = el.dataset.celink.split('.').map(Number); UI.ced.c.mods[mi].aulas[ai].tec = el.value || null; return true; }
+  if (el.dataset?.nv != null || el.dataset?.ce != null) return true;
+  return false;
+}
+function p2Input(el){
+  if (el.dataset?.nv != null && UI.novo){ setPath(UI.novo, el.dataset.nv, el.value); if (/\.(txt|url|titulo)$/.test(el.dataset.nv)){ UI.novo.ov = /\.txt$/.test(el.dataset.nv) ? {} : UI.novo.ov; const p = document.getElementById('nvPrev'); if (p) p.innerHTML = novoPreview(); } return true; }
+  if (el.dataset?.ce != null && UI.ced){ setPath(UI.ced.c, el.dataset.ce, el.value); return true; }
+  if (el.id === 'tecQ'){ UI.tecQ = el.value; const l = document.getElementById('tecList'); if (l) l.innerHTML = todasList(todayStr()); return true; }
+  return false;
+}
+function demoCursos(st, T0){
+  const dd = n => ds(addDays(pd(T0), -n)), P = st.pes;
+  const tec = (id, nome, nivel, ult) => { P['tec:' + id] = { nome, nivel, ...(ult != null ? { ult:dd(ult) } : {}) }; return id; };
+  tec('t1', 'Controle do braço', 5, 3); tec('t2', 'Armlock da guarda fechada', 3, 1); tec('t3', 'Armlock com pé no quadril', 1, 0); tec('t4', 'Armlock invertido', 0); tec('t5', 'Kimura da meia-guarda', 2, 12);
+  tec('t6', 'Armlock da montada', 0); tec('t7', 'Pegadas da De La Riva', 4, 5); tec('t8', 'Raspagem para as costas', 3, 9); tec('t9', 'Berimbolo', 2, 6); tec('t10', 'Kiss of the dragon', 1, 1); tec('t11', 'Inversão para a De La Riva', 1, 3);
+  const A = (id, titulo, t, tec, tipo = 'tec') => ({ id, titulo, t, dur:null, tipo, tec:tipo === 'conc' ? null : tec });
+  const c1 = { nome:'Armlock', criado:dd(40), fontes:[{ id:'f1', tipo:'bilibili', url:'https://www.bilibili.com/video/BV1demo00000' }, { id:'f2', tipo:'solto', url:'https://www.youtube.com/watch?v=demo0000000' }], mods:[
+    { id:'m1', nome:'Parte 1 · Fundamentos', fonte:'f1', p:1, aulas:[A('a1', 'Princípios do armlock', 0, null, 'conc'), A('a2', 'Controle do braço', 550, 't1')] },
+    { id:'m2', nome:'Parte 2 · Da guarda', fonte:'f1', p:2, aulas:[A('a3', 'Armlock da guarda fechada', 0, 't2'), A('a4', 'Armlock com pé no quadril', 870, 't3'), A('a5', 'Armlock invertido', 1540, 't4')] },
+    { id:'m3', nome:'Parte 3 · Da meia-guarda', fonte:'f1', p:3, aulas:[A('a6', 'Kimura da meia-guarda', 0, 't5')] },
+    { id:'m4', nome:'Vídeos extras', fonte:'f2', p:null, aulas:[{ ...A('a7', 'Armlock da montada', 0, 't6'), url:'https://www.youtube.com/watch?v=demo0000000' }] } ] };
+  const c2 = { nome:'Guarda De La Riva', criado:dd(20), fontes:[{ id:'f3', tipo:'bilibili', url:'https://www.bilibili.com/video/BV1demo00001' }], mods:[
+    { id:'m5', nome:'Parte 1 · Base', fonte:'f3', p:1, aulas:[A('b1', 'Pegadas da De La Riva', 0, 't7'), A('b2', 'Raspagem para as costas', 465, 't8'), A('b3', 'Berimbolo', 910, 't9')] },
+    { id:'m6', nome:'Parte 2 · Ataques', fonte:'f3', p:2, aulas:[A('b4', 'Kiss of the dragon', 0, 't10'), A('b5', 'Inversão para a De La Riva', 390, 't11'), A('b6', 'Armlock da guarda fechada', 820, 't2')] } ] };
+  [c1, c2].forEach(c => c.mods.forEach(recalcDur));
+  P['curso:c1'] = c1; P['curso:c2'] = c2;
+  const vis = (c, a, n, extra = {}) => { P[`aula:${c}:${a}`] = { vista:true, em:dd(n), ...extra }; };
+  vis('c1', 'a1', 14); vis('c1', 'a2', 3, { obs:'Controle do punho com as duas mãos.', notas:'09/03\nO cotovelo dele tem que ficar colado no meu peito antes de girar.' }); vis('c1', 'a3', 1, { rev:true }); vis('c1', 'a6', 12);
+  vis('c2', 'b1', 5); vis('c2', 'b2', 9); vis('c2', 'b3', 6); vis('c2', 'b4', 1);
+  P['aula:c1:a4'] = { obs:'Pé no quadril antes de girar o corpo.', drill:'3 × 10 de cada lado, com parceiro', teste:'Tentar 2 vezes partindo da guarda fechada' };
 }
 
 /* ---------- Calendário ---------- */
@@ -1241,8 +1675,10 @@ const sheetHead = (inner) => `<div class="sheet-h">${inner}<button class="close"
 
 /* ---------- Meus estudos: abas internas ---------- */
 function viewEstudos(T){
-  const t = ['tec','planos','notas','videos'].includes(UI.estTab) ? UI.estTab : 'tec';
-  return `<div class="segwrap"><div class="seg">${[['tec','Técnicas'],['planos','Planos'],['notas','Anotações'],['videos','Vídeos']].map(([k,l]) => `<button data-action="estab" data-v="${k}" aria-pressed="${t === k}">${l}</button>`).join('')}</div></div>` + ({ tec:viewTec, planos:viewPlanos, notas:viewEst, videos:viewVideos }[t])(T);
+  const t = ['tec','cursos','videos'].includes(UI.estTab) ? UI.estTab : 'tec';
+  if (t === 'cursos' && UI.tecAll) return viewTodasTec(T);
+  if (t === 'cursos' && UI.curso) return UI.aula ? viewAula(UI.curso, UI.aula, T) : viewCurso(UI.curso, T);
+  return `<div class="segwrap"><div class="seg">${[['tec','Academia'],['cursos','Cursos'],['videos','Vídeos']].map(([k,l]) => `<button data-action="estab" data-v="${k}" aria-pressed="${t === k}">${l}</button>`).join('')}</div></div>` + ({ tec:viewTec, cursos:viewCursos, videos:viewVideos }[t])(T);
 }
 
 /* ---------- Técnicas: mês → semanas com tipo (Ensino / Apresentação / Livre) ---------- */
@@ -1463,16 +1899,15 @@ function allVideos(gym){
   pes('mob').forEach(({ v }) => (v.itens || []).forEach(e => e.link && o.push({ g:'Mobilidade', t:e.nome, s:v.nome, url:e.link })));
   return o;
   }
-  Object.entries(D.tec).forEach(([k, v]) => { if (k.startsWith('sem:')) (v.links || []).forEach(l => o.push({ g:'Técnicas', t:'Semana de ' + fmtS(k.slice(4)), s:tecVal('mes:' + k.slice(4, 11), 'tema') || 'técnicas da academia', url:l.url })); });
-  pes('plano').forEach(({ v }) => (v.etapas || []).forEach(e => e.link && o.push({ g:'Planos', t:e.titulo || 'Semana ' + e.sem, s:v.titulo, url:e.link })));
-  Object.values(D.studies).forEach(s => (s.links || []).forEach(l => o.push({ g:'Anotações', t:l.titulo || s.titulo, s:s.titulo, url:l.url })));
+  Object.entries(D.tec).forEach(([k, v]) => { if (k.startsWith('sem:')) (v.links || []).forEach(l => o.push({ g:'Academia', t:'Semana de ' + fmtS(k.slice(4)), s:tecVal('mes:' + k.slice(4, 11), 'tema') || 'técnicas da academia', url:l.url })); });
+  cursosL().forEach(({ v }) => { (v.fontes || []).filter(f => f.tipo !== 'solto' && f.url).forEach(f => o.push({ g:'Cursos', t:v.nome, s:ytId(f.url) ? 'YouTube' : biliId(f.url) ? 'Bilibili' : hostOf(f.url), url:f.url })); aulasDe(v).forEach(x => x.a.url && o.push({ g:'Cursos', t:x.a.titulo, s:v.nome + ' · vídeo solto', url:x.a.url })); });
   return o;
 }
 function viewVideos(T, gym){
-  const all = allVideos(gym), groups = gym ? ['Todos','Musculação','Mobilidade'] : ['Todos','Técnicas','Planos','Anotações'], f = groups.includes(UI.libF) ? UI.libF : 'Todos';
+  const all = allVideos(gym), groups = gym ? ['Todos','Musculação','Mobilidade'] : ['Todos','Academia','Cursos'], f = groups.includes(UI.libF) ? UI.libF : 'Todos';
   const list = all.map((v, i) => ({ ...v, i })).filter(v => f === 'Todos' || v.g === f);
   return `<section class="sec"><div class="sec-h"><h2>Vídeos</h2><span class="muted tiny">${plural(all.length,'vídeo','vídeos')}</span></div>
-    <p class="note" style="margin-top:0">${gym ? 'Os vídeos dos exercícios de musculação e de mobilidade, em um lugar só. Para adicionar, cole o link no exercício, dentro da ficha ou da rotina.' : 'Os vídeos dos seus estudos, em um lugar só. Para adicionar, cole o link na semana, na etapa do plano ou na anotação.'}</p>
+    <p class="note" style="margin-top:0">${gym ? 'Os vídeos dos exercícios de musculação e de mobilidade, em um lugar só. Para adicionar, cole o link no exercício, dentro da ficha ou da rotina.' : 'Os vídeos da Academia e dos seus cursos, em um lugar só. Para adicionar, cole o link na semana da Academia ou numa fonte do curso.'}</p>
     <div class="chips" style="margin-top:10px">${groups.map(g => `<button class="chip ${f === g ? 'on' : ''}" data-action="lib-filter" data-v="${g}">${g}${g === 'Todos' ? '' : ' ' + all.filter(v => v.g === g).length}</button>`).join('')}</div></section>
     <section class="sec">${list.length ? list.map(v => `<div class="vlib"><div class="t">${esc(v.t || 'Vídeo')}</div><div class="d">${esc(v.g)}${v.s ? ' · ' + esc(v.s) : ''}</div>${vid(v.url, 'lib:' + v.i, 'Abrir')}</div>`).join('') : '<p class="empty">Nenhum vídeo aqui ainda.</p>'}</section>`;
 }
@@ -1578,7 +2013,7 @@ function mobDaySheet(k){
 /* ---------- janela (modal) e ações ---------- */
 function modalSheet(){
   const m = UI.modal; if (!m) return '';
-  const h = { ficha:fichaSheet, sessao:sessionSheet, ex:exSheet, mob:mobSheet, mobdia:mobDaySheet, plano:planSheet, novoplano:newPlanSheet, medir:medirSheet }[m.t]?.(m.k) || '';
+  const h = { ficha:fichaSheet, sessao:sessionSheet, ex:exSheet, mob:mobSheet, mobdia:mobDaySheet, plano:planSheet, novoplano:newPlanSheet, medir:medirSheet, 'curso-novo':novoSheet, 'curso-edit':editSheet }[m.t]?.(m.k) || '';
   if (!h) UI.modal = null; return h;
 }
 function closeModal(){
@@ -1587,7 +2022,7 @@ function closeModal(){
   if (m.t === 'ex' && m.back){ UI.modal = { t:'sessao', k:m.back }; return; }
   if (m.t === 'sessao' && D.pes[m.k] && !(D.pes[m.k].ex || []).some(e => okSets(e).length) && !(D.pes[m.k].obs || '').trim()){ delete D.pes[m.k]; savePes(m.k); }
   if (m.t === 'mobdia' && D.pes[m.k] && !(D.pes[m.k].feitos || []).length){ delete D.pes[m.k]; savePes(m.k); }
-  UI.modal = null; UI.play = null; UI.etapa = null; UI.slog = null; UI.slogAll = false; UI.med = null;
+  UI.modal = null; UI.play = null; UI.etapa = null; UI.slog = null; UI.slogAll = false; UI.med = null; UI.novo = null; UI.ced = null;
 }
 function markGym(date){
   const i = daySlots(date).findIndex(s => s.mod === 'gym' && !s.status); if (i < 0) return false;
@@ -1703,10 +2138,12 @@ document.addEventListener('click', ev => {
   const el = ev.target.closest('[data-action]'); if (!el) return;
   if (el.dataset.action === 'close-sheet' && el.classList.contains('sheet-bg') && ev.target.closest('[data-stop]')) return;
   const a = el.dataset.action, d = el.dataset.date, i = +el.dataset.i;
+  if (a === 'modal' && el.dataset.t === 'curso-edit'){ editOpen(el.dataset.k); UI.modal = { t:'curso-edit', k:el.dataset.k }; render(); return; }
+  const r2 = p2Action(a, el, todayStr()); if (r2 !== null){ if (r2) render(); return; }
   const r1 = p1Action(a, el, todayStr()); if (r1 !== null){ if (r1) render(); return; }
   const r4 = v4Action(a, el, todayStr()); if (r4 !== null){ if (r4) render(); return; }
   switch (a){
-    case 'tab': UI.tab = el.dataset.id; UI.justify = null; UI.open = null; scrollTo(0,0); render(); break;
+    case 'tab': if (UI.tab === 'est' && el.dataset.id === 'est'){ UI.curso = null; UI.aula = null; UI.tecAll = false; } UI.tab = el.dataset.id; UI.justify = null; UI.open = null; UI.play = null; scrollTo(0,0); render(); break;
     case 'mais': UI.mais = el.dataset.v; UI.open = null; render(); break;
     case 'tmonth': UI.tmonth = clamp(UI.tmonth + +el.dataset.d, 0, 11); UI.open = null; render(); break;
     case 'tec-copy': navigator.clipboard?.writeText(monthText(UI.tmonth)).then(() => toast('Mês copiado'), () => toast('Não consegui copiar')); break;
@@ -1776,6 +2213,7 @@ document.addEventListener('click', ev => {
 document.addEventListener('toggle', ev => { const el = ev.target; if (el.matches?.('details.cfg')){ if (el.open) UI.open = el.dataset.sec; else if (UI.open === el.dataset.sec) UI.open = ''; } }, true);
 document.addEventListener('change', ev => {
   const el = ev.target;
+  if (p2Change(el)) return;
   if (p1Change(el)) return;
   if (v4Change(el)) return;
   if (el.dataset.tec){ saveTec(el); return; }
@@ -1800,6 +2238,7 @@ function saveSummary(){
 }
 document.addEventListener('input', ev => {
   const el = ev.target;
+  if (p2Input(el)) return;
   if (p1Input(el)) return;
   if (el.id === 'sumIn'){ clearTimeout(saveSummary.t); saveSummary.t = setTimeout(saveSummary, 900); }
   else if (el.id === 'estNote') UI.noteDraft = el.value;
