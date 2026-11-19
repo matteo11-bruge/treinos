@@ -565,6 +565,27 @@ nav.tabs svg{stroke-width:2}
 
 .link,.btn,.brand,.who,.chip,.seg button{white-space:nowrap}
 .brand{min-width:0;overflow:hidden;text-overflow:ellipsis}
+
+/* Estudos (Rodada 7): temas → instrucionais → texto */
+.lsthead{display:flex;justify-content:space-between;align-items:center;margin:10px 4px 0}
+.lsthead > span{font-size:0.82rem;font-weight:600;color:var(--ink-2)}
+.sec.lst{padding:0 18px}
+.lrow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;background:none;padding:14px 0;border-top:1px solid var(--line);color:inherit;min-height:56px}
+.lrow:first-child{border-top:0}
+.lrow .grow{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.lrow .t{font-size:0.95rem;font-weight:650}
+.lrow .d{font-size:0.78rem;color:var(--muted)}
+.chv{font-size:1.1rem;color:var(--muted)}
+.sec.md{padding:18px 18px 20px;line-height:1.5}
+.md-h1{font-size:1.18rem;font-weight:700;margin:22px 0 4px;letter-spacing:-.01em}
+.md-h2{font-size:1.06rem;font-weight:700;margin:16px 0 2px;padding-top:12px;border-top:1px solid var(--line)}
+.md-h3{font-size:0.95rem;font-weight:700;margin:12px 0 2px}
+.md-h1 + .md-h2{border-top:0;padding-top:0}
+.md > :first-child{margin-top:0;border-top:0;padding-top:0}
+.md-h4{font-size:0.85rem;font-weight:650;margin:10px 0 2px}
+.md-p{font-size:0.92rem;margin:6px 0}
+.md-ul{margin:2px 0 4px;padding-left:20px;font-size:0.92rem}
+.md-ul li{margin:3px 0}
 </style>
 </head>
 <body>
@@ -588,7 +609,7 @@ const LS = {
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
   del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
-const K = { code:'treinos-codigo', cache:'treinos-cache', queue:'treinos-fila', theme:'treinos-tema', demo:'treinos-demo7' };
+const K = { code:'treinos-codigo', cache:'treinos-cache', queue:'treinos-fila', theme:'treinos-tema', demo:'treinos-demo8' };
 const QS = new URLSearchParams(location.search);
 const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || QS.get('ios') === '1';
 
@@ -751,7 +772,7 @@ function demoSeed(){
     { id:'x1', nome:'Supino reto', alvo:'3 séries · 8 a 10 reps', link:'', sets:[{ kg, reps:r, ok:true }, { kg, reps:r - 1, ok:true }, { kg, reps:r - 2, ok:true }] },
     { id:'x2', nome:'Remada curvada', alvo:'3 séries · 10 reps', link:'', sets:[{ kg:kg - 5, reps:10, ok:true }, { kg:kg - 5, reps:10, ok:true }, { kg:kg - 5, reps:9, ok:true }] },
     { id:'x3', nome:'Barra fixa', alvo:'3 séries · máximo reps', link:'', sets:[{ kg:'', reps:r, ok:true }, { kg:'', reps:r - 2, ok:true }] }] }; });
-  { const T0 = todayStr(); demoCursos(st, T0); let kg = 69.1;
+  { const T0 = todayStr(); demoCursos(st, T0); demoInsts(st, T0); let kg = 69.1;
     for (let i = 62; i >= 0; i--){ const d = ds(addDays(pd(T0), -i)); kg += 0.022; if (rnd() < 0.18) continue; st.pes['peso:' + d] = { kg: Math.round((kg + (rnd() - 0.5) * 0.6) * 10) / 10 }; }
     const sat = addDays(pd(T0), -((pd(T0).getDay() + 1) % 7));
     [[ds(addDays(sat, -7)), [37.1, 36.9], [82.4, 82.2]], [ds(sat), [37.0, 37.0], [82.2, 81.8]]].forEach(([d, pc, ci]) => { const g = navy((ci[0] + ci[1]) / 2, (pc[0] + pc[1]) / 2, 175); st.pes['medida:' + d] = { pescoco:pc, cintura:ci, altura:175, gordura:Math.round(g * 10) / 10 }; }); }
@@ -1010,7 +1031,7 @@ function viewResumo(T){
       <div class="hero"><span class="mid">0</span><span class="of">treinos</span><span class="right muted">começa em 1º jan</span></div>
       <div class="meter" role="img" aria-label="0 de ${S0.yearGoal}"><i style="width:0%"></i></div>
       <p class="sub">Meta de ${S0.yearGoal} treinos em ${Y()}.</p></section>`;
-    return h + estudoCard(T) + gymBlock(T, null);
+    return h + gymBlock(T, null);
   }
   h += `<p class="rdate">${fmtDL(T)}</p>`;
   /* semana */
@@ -1032,7 +1053,6 @@ function viewResumo(T){
     <div class="meter" role="img" aria-label="${t.present} de ${S.yearGoal}; esperado até hoje ${fmtN(ys.expected)}"><i style="width:${clamp(t.present / S.yearGoal * 100, 0, 100)}%"></i><b style="left:${clamp(ys.expected / S.yearGoal * 100, 0, 100)}%"></b></div>
     <p class="sub">Projeção: ${ys.projection} em dezembro · sequência de ${plural(ys.streak, 'semana', 'semanas')}</p></section>`;
   /* estudo */
-  h += estudoCard(T);
   /* musculação + peso */
   h += gymBlock(T, st);
   return h;
@@ -1699,11 +1719,11 @@ function p3Change(el){
 /* voltar arrastando da borda esquerda (cursos, aula, todas as técnicas) */
 (() => {
   let x0 = null, y0 = 0;
-  document.addEventListener('touchstart', e => { const t = e.touches[0]; x0 = (e.touches.length === 1 && t.clientX < 28 && UI.tab === 'est' && !UI.modal && !UI.sheet && (UI.aula || UI.curso || UI.tecAll)) ? t.clientX : null; y0 = t.clientY; }, { passive:true });
+  document.addEventListener('touchstart', e => { const t = e.touches[0]; x0 = (e.touches.length === 1 && t.clientX < 28 && UI.tab === 'est' && !UI.modal && !UI.sheet && (UI.inst || UI.tema || UI.aula || UI.curso || UI.tecAll)) ? t.clientX : null; y0 = t.clientY; }, { passive:true });
   document.addEventListener('touchend', e => {
     if (x0 == null) return; const t = e.changedTouches[0], dx = t.clientX - x0, dy = Math.abs(t.clientY - y0); x0 = null;
     if (dx < 70 || dy > dx) return;
-    if (UI.aula) UI.aula = null; else if (UI.tecAll){ UI.tecAll = false; UI.tecQ = ''; } else UI.curso = null;
+    if (UI.inst) UI.inst = null; else if (UI.tema) UI.tema = null; else if (UI.aula) UI.aula = null; else if (UI.tecAll){ UI.tecAll = false; UI.tecQ = ''; } else UI.curso = null;
     UI.play = null; render(); scrollTo(0, 0);
   }, { passive:true });
 })();
@@ -1723,6 +1743,152 @@ function modChips(w, T){
   const c = {}; w.days.forEach(d => daySlots(d).forEach(s => { if (effStatus(s, d, T) === 'present') c[s.mod] = (c[s.mod] || 0) + 1; }));
   const ks = ['gi', 'nogi', 'wrestling', 'gym'].filter(k => c[k]); if (!ks.length) return '';
   return `<div class="mchips">${ks.map(k => `<span class="mchip m-${k}"><i></i>${MODS[k].label} ${c[k]}</span>`).join('')}</div>`;
+}
+
+/* ================= Estudos (18/11, Rodada 7): temas → instrucionais → texto ================= */
+const insts = () => pes('inst').sort((a, b) => String(a.v.titulo).localeCompare(String(b.v.titulo), 'pt'));
+function temasL(){
+  const m = new Map();
+  for (const x of insts()){ const t = String(x.v.tema || 'Sem tema').trim(); m.set(t, (m.get(t) || 0) + 1); }
+  return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0], 'pt'));
+}
+const fonteNome = u => !u ? '' : ytId(u) ? 'YouTube' : biliId(u) ? 'Bilibili' : hostOf(u);
+const nPartes = t => Math.max(1, (String(t || '').match(/^\s*#*\s*parte\s+\d+/gim) || []).length);
+function mdLite(t){
+  const L = String(t || '').replace(/\r/g, '').split('\n'); let h = '', ul = null;
+  const close = () => { if (ul){ h += `</${ul}>`; ul = null; } };
+  const inl = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  for (const raw of L){
+    const l = raw.trim();
+    if (!l){ close(); continue; }
+    let m;
+    if ((m = l.match(/^(#{1,4})\s+(.*)$/))){ close(); const n = m[1].length; h += `<p class="md-h${Math.min(n, 3)}">${inl(m[2])}</p>`; continue; }
+    if (/^parte\s+\d+\b/i.test(l)){ close(); h += `<p class="md-h1">${inl(l)}</p>`; continue; }
+    if ((m = l.match(/^[-•*]\s+(.*)$/))){ if (ul !== 'ul'){ close(); h += '<ul class="md-ul">'; ul = 'ul'; } h += `<li>${inl(m[1])}</li>`; continue; }
+    if ((m = l.match(/^\d+[.)]\s+(.*)$/))){ if (ul !== 'ol'){ close(); h += '<ol class="md-ul">'; ul = 'ol'; } h += `<li>${inl(m[1])}</li>`; continue; }
+    close();
+    if (/:$/.test(l) && l.length < 60 || /^(passo a passo|detalhes[- ]chave|erros comuns|como drilar|conceitos?|resumo|observa[cç][oõ]es)$/i.test(l)) h += `<p class="md-h4">${inl(l.replace(/:$/, ''))}</p>`;
+    else h += `<p class="md-p">${inl(l)}</p>`;
+  }
+  close(); return h;
+}
+function viewTemas(){
+  const ts = temasL();
+  let h = `<div class="lsthead"><span>Temas</span><button class="link" data-action="inst-novo">+ Novo instrucional</button></div>`;
+  if (!ts.length) return h + `<section class="sec"><p class="empty">Nenhum instrucional ainda. Toque em "Novo instrucional", escolha o tema, cole o link e o texto que o Claude organizou a partir da transcrição.</p></section>`;
+  h += `<section class="sec lst">${ts.map(([t, n]) => `<button class="lrow" data-action="tema-open" data-v="${esc(t)}"><span class="grow"><span class="t">${esc(t)}</span><span class="d">${plural(n, 'instrucional', 'instrucionais')}</span></span><span class="chv">›</span></button>`).join('')}</section>`;
+  return h + `<p class="note" style="margin:10px 4px 0">Cada tema junta os instrucionais sobre o mesmo assunto.</p>`;
+}
+function viewTema(t){
+  const l = insts().filter(x => String(x.v.tema || 'Sem tema').trim() === t);
+  if (!l.length){ UI.tema = null; return viewTemas(); }
+  return `<div class="subbar"><button class="link" data-action="tema-back">‹ Estudos</button><button class="link" data-action="inst-novo" data-v="${esc(t)}">+ Instrucional</button></div>
+    <h2 class="ptitle">${esc(t)}</h2><p class="muted small">${plural(l.length, 'instrucional', 'instrucionais')}</p>
+    <section class="sec lst">${l.map(({ k, v }) => `<button class="lrow" data-action="inst-open" data-k="${k}"><span class="grow"><span class="t">${esc(v.titulo)}</span><span class="d">${[fonteNome(v.link), plural(nPartes(v.texto), 'parte', 'partes')].filter(Boolean).join(' · ')}</span></span><span class="chv">›</span></button>`).join('')}</section>`;
+}
+function viewInst(k){
+  const v = D.pes[k]; if (!v){ UI.inst = null; return UI.tema ? viewTema(UI.tema) : viewTemas(); }
+  const f = fonteNome(v.link);
+  return `<div class="subbar"><button class="link" data-action="inst-back">‹ ${esc(v.tema || 'Estudos')}</button><button class="link" data-action="inst-edit" data-k="${k}">Editar</button></div>
+    <h2 class="ptitle">${esc(v.titulo)}</h2><p class="muted small">${esc(v.tema || '')} · ${plural(nPartes(v.texto), 'parte', 'partes')}${v.link ? ` · <a class="lk" style="min-height:0;display:inline" href="${esc(normUrl(v.link))}" target="_blank" rel="noopener">Abrir no ${esc(f || 'link')} ›</a>` : ''}</p>
+    <section class="sec md">${v.texto && v.texto.trim() ? mdLite(v.texto) : '<p class="empty">Sem texto ainda. Toque em "Adicionar parte" e cole o texto organizado pelo Claude.</p>'}</section>
+    <button class="btn wide" data-action="inst-parte" data-k="${k}">+ Adicionar parte</button>`;
+}
+function viewEstudos(T){
+  if (UI.inst) return viewInst(UI.inst);
+  if (UI.tema) return viewTema(UI.tema);
+  return viewTemas();
+}
+function instSheet(){
+  const d = UI.instD; if (!d) return '';
+  const ts = temasL().map(x => x[0]);
+  return sheetWrap(d.k ? 'Editar instrucional' : 'Novo instrucional', `${sheetHead(`<h2 style="flex:1">${d.k ? 'Editar instrucional' : 'Novo instrucional'}</h2>`)}
+    <span class="sub-h" style="margin-top:0">Tema</span>
+    <div class="chips">${ts.map(t => `<button class="chip ${!d.novoTema && d.tema === t ? 'on' : ''}" data-action="instd-tema" data-v="${esc(t)}">${esc(t)}</button>`).join('')}<button class="chip ${d.novoTema || !ts.length ? 'on' : ''}" data-action="instd-tema" data-v="">+ Novo tema</button></div>
+    ${d.novoTema || !ts.length ? `<label class="lbl" style="margin-top:10px">Nome do tema<input type="text" data-instd="tema" maxlength="60" value="${esc(d.tema)}" placeholder="Ex.: Leglock"></label>` : ''}
+    <label class="lbl" style="margin-top:14px">Título<input type="text" data-instd="titulo" maxlength="100" value="${esc(d.titulo)}" placeholder="Ex.: Instrucional Leglock Pawel"></label>
+    <label class="lbl" style="margin-top:12px">Link do vídeo<input type="url" inputmode="url" autocapitalize="off" data-instd="link" value="${esc(d.link)}" placeholder="bilibili.com/video/… ou youtube.com/…"></label>
+    <label class="lbl" style="margin-top:12px">Texto organizado pelo Claude<textarea data-instd="texto" rows="10" placeholder="Cole aqui o texto que o Claude devolveu">${esc(d.texto)}</textarea></label>
+    ${d.k ? '' : '<p class="note">Tem mais partes? Depois, em "Adicionar parte", cole o texto da próxima: ela entra no fim.</p>'}
+    <div class="actions"><button class="btn dark" style="flex:1;justify-content:center" data-action="instd-salvar">Salvar</button></div>
+    ${d.k ? '<div class="actions"><button class="btn sm danger" data-action="instd-apagar">Apagar este instrucional</button></div>' : ''}`);
+}
+function parteSheet(){
+  const d = UI.parteD; if (!d || !D.pes[d.k]) return '';
+  const v = D.pes[d.k];
+  return sheetWrap('Adicionar parte', `${sheetHead(`<div style="flex:1"><h2>Adicionar parte</h2><p class="muted small">${esc(v.titulo)} · entra no fim, como parte ${nPartes(v.texto) + (v.texto && v.texto.trim() ? 1 : 0)}</p></div>`)}
+    <label class="lbl">Texto da parte<textarea data-parted="texto" rows="12" placeholder="Cole aqui o texto que o Claude devolveu para esta parte">${esc(d.texto)}</textarea></label>
+    <div class="actions"><button class="btn dark" style="flex:1;justify-content:center" data-action="parte-salvar">Adicionar</button></div>`);
+}
+function p4Action(a, el, T){
+  switch (a){
+    case 'tema-open': UI.tema = el.dataset.v; UI.inst = null; scrollTo(0, 0); return true;
+    case 'tema-back': UI.tema = null; UI.inst = null; scrollTo(0, 0); return true;
+    case 'inst-open': UI.inst = el.dataset.k; UI.tema = String(D.pes[el.dataset.k]?.tema || '').trim() || UI.tema; scrollTo(0, 0); return true;
+    case 'inst-back': UI.inst = null; scrollTo(0, 0); return true;
+    case 'inst-novo': { const t = el.dataset.v || UI.tema || ''; UI.instD = { k:null, tema:t, titulo:'', link:'', texto:'', novoTema:!t && !temasL().length }; UI.modal = { t:'inst', k:'novo' }; return true; }
+    case 'inst-edit': { const v = D.pes[el.dataset.k]; UI.instD = { k:el.dataset.k, tema:v.tema || '', titulo:v.titulo || '', link:v.link || '', texto:v.texto || '', novoTema:false }; UI.modal = { t:'inst', k:el.dataset.k }; return true; }
+    case 'instd-tema': { const v = el.dataset.v; if (v){ UI.instD.tema = v; UI.instD.novoTema = false; } else { UI.instD.novoTema = true; UI.instD.tema = ''; } return true; }
+    case 'instd-salvar': {
+      const d = UI.instD, tema = String(d.tema || '').trim(), titulo = String(d.titulo || '').trim();
+      if (!tema){ toast('Escolha ou escreva o tema'); return false; }
+      if (!titulo){ toast('Dê um título ao instrucional'); return false; }
+      const k = d.k || 'inst:' + uid(), old = D.pes[k] || {};
+      D.pes[k] = { ...old, tema, titulo, link:String(d.link || '').trim(), texto:d.texto || '', criado:old.criado || T };
+      savePes(k); UI.modal = null; UI.instD = null; UI.tab = 'est'; UI.tema = tema; UI.inst = k; scrollTo(0, 0); toast(d.k ? 'Instrucional salvo' : 'Instrucional criado'); return true; }
+    case 'instd-apagar': { const k = UI.instD.k, v = D.pes[k]; if (!confirm(`Apagar "${v.titulo}"? O texto também será apagado.`)) return false; delete D.pes[k]; savePes(k); UI.modal = null; UI.instD = null; UI.inst = null; toast('Instrucional apagado'); return true; }
+    case 'inst-parte': UI.parteD = { k:el.dataset.k, texto:'' }; UI.modal = { t:'parte', k:el.dataset.k }; return true;
+    case 'parte-salvar': {
+      const d = UI.parteD, v = D.pes[d.k], add = String(d.texto || '').trim();
+      if (!add){ toast('Cole o texto da parte'); return false; }
+      v.texto = v.texto && v.texto.trim() ? v.texto.replace(/\s+$/, '') + '\n\n' + add : add;
+      savePes(d.k); UI.modal = null; UI.parteD = null; toast('Parte adicionada'); return true; }
+  }
+  return null;
+}
+function p4Input(el){
+  if (el.dataset?.instd && UI.instD){ UI.instD[el.dataset.instd] = el.value; return true; }
+  if (el.dataset?.parted && UI.parteD){ UI.parteD.texto = el.value; return true; }
+  return false;
+}
+function demoInsts(st, T0){
+  const P = st.pes;
+  P['inst:i1'] = { tema:'Leglock', titulo:'Instrucional Leglock Pawel', link:'https://www.bilibili.com/video/BV1demo00009', criado:T0, texto:`# Parte 1 · Fundamentos
+## Ashi garami
+Passo a passo
+- Sente com o pé dele entre as suas pernas
+- Pé de dentro no quadril, de fora por cima da coxa
+- Joelhos apertados
+Detalhes-chave
+- O quadril dele não pode subir
+- Controle o calcanhar antes de qualquer giro
+Erros comuns
+- Deixar espaço entre os joelhos
+- Puxar com os braços em vez do quadril
+Como drilar
+- 3 × 5 entradas de cada lado, parceiro parado
+
+# Parte 2 · Entradas
+## Entrada pela guarda sentada
+Passo a passo
+- Pegue a calça na altura do tornozelo
+- Role por baixo levando o joelho junto
+Detalhes-chave
+- Cabeça longe dos joelhos dele
+Erros comuns
+- Soltar a pegada no meio do giro
+Como drilar
+- 5 entradas seguidas, trocando o lado` };
+  P['inst:i2'] = { tema:'Leglock', titulo:'Ashi garami do básico', link:'https://www.youtube.com/watch?v=demo0000002', criado:T0, texto:`## Posição básica
+Passo a passo
+- Pé de dentro no quadril
+- Joelho de fora apontando para cima
+Detalhes-chave
+- Abrace o calcanhar junto ao peito` };
+  P['inst:i3'] = { tema:'Guarda fechada', titulo:'Guarda fechada · ataques', link:'https://www.bilibili.com/video/BV1demo00010', criado:T0, texto:`# Parte 1 · Quebra de postura
+## Puxada pela gola
+- Duas mãos na gola, cotovelos para dentro
+- Quadril para cima ao puxar` };
 }
 
 /* ---------- Calendário ---------- */
@@ -1937,7 +2103,7 @@ const sheetWrap = (label, body) => `<div class="sheet-bg" data-action="close-she
 const sheetHead = (inner) => `<div class="sheet-h">${inner}<button class="close" data-action="close-sheet" aria-label="Fechar">✕</button></div>`;
 
 /* ---------- Meus estudos: abas internas ---------- */
-function viewEstudos(T){
+function viewEstudosCursos(T){
   const t = ['cursos','videos'].includes(UI.estTab) ? UI.estTab : 'cursos';
   if (t === 'cursos' && UI.tecAll) return viewTodasTec(T);
   if (t === 'cursos' && UI.curso) return UI.aula ? viewAula(UI.curso, UI.aula, T) : viewCurso(UI.curso, T);
@@ -2243,7 +2409,7 @@ function mobDaySheet(k){
 /* ---------- janela (modal) e ações ---------- */
 function modalSheet(){
   const m = UI.modal; if (!m) return '';
-  const h = { ficha:fichaSheet, sessao:sessionSheet, ex:exSheet, mob:mobSheet, mobdia:mobDaySheet, plano:planSheet, novoplano:newPlanSheet, medir:medirSheet, 'curso-novo':novoSheet, 'curso-edit':editSheet, 'acad-mes':acadMesSheet, 'acad-sem':acadSemSheet }[m.t]?.(m.k) || '';
+  const h = { ficha:fichaSheet, sessao:sessionSheet, ex:exSheet, mob:mobSheet, mobdia:mobDaySheet, plano:planSheet, novoplano:newPlanSheet, medir:medirSheet, 'curso-novo':novoSheet, 'curso-edit':editSheet, 'acad-mes':acadMesSheet, 'acad-sem':acadSemSheet, inst:instSheet, parte:parteSheet }[m.t]?.(m.k) || '';
   if (!h) UI.modal = null; return h;
 }
 function closeModal(){
@@ -2252,7 +2418,7 @@ function closeModal(){
   if (m.t === 'ex' && m.back){ UI.modal = { t:'sessao', k:m.back }; return; }
   if (m.t === 'sessao' && D.pes[m.k] && !(D.pes[m.k].ex || []).some(e => okSets(e).length) && !(D.pes[m.k].obs || '').trim()){ delete D.pes[m.k]; savePes(m.k); }
   if (m.t === 'mobdia' && D.pes[m.k] && !(D.pes[m.k].feitos || []).length){ delete D.pes[m.k]; savePes(m.k); }
-  UI.modal = null; UI.play = null; UI.etapa = null; UI.slog = null; UI.slogAll = false; UI.med = null; UI.novo = null; UI.ced = null;
+  UI.modal = null; UI.play = null; UI.etapa = null; UI.slog = null; UI.slogAll = false; UI.med = null; UI.novo = null; UI.ced = null; UI.instD = null; UI.parteD = null;
 }
 function markGym(date){
   const i = daySlots(date).findIndex(s => s.mod === 'gym' && !s.status); if (i < 0) return false;
@@ -2369,12 +2535,13 @@ document.addEventListener('click', ev => {
   if (el.dataset.action === 'close-sheet' && el.classList.contains('sheet-bg') && ev.target.closest('[data-stop]')) return;
   const a = el.dataset.action, d = el.dataset.date, i = +el.dataset.i;
   if (a === 'modal' && el.dataset.t === 'curso-edit'){ editOpen(el.dataset.k); UI.modal = { t:'curso-edit', k:el.dataset.k }; render(); return; }
+  const r4b = p4Action(a, el, todayStr()); if (r4b !== null){ if (r4b) render(); return; }
   const r3 = p3Action(a, el, todayStr()); if (r3 !== null){ if (r3) render(); return; }
   const r2 = p2Action(a, el, todayStr()); if (r2 !== null){ if (r2) render(); return; }
   const r1 = p1Action(a, el, todayStr()); if (r1 !== null){ if (r1) render(); return; }
   const r4 = v4Action(a, el, todayStr()); if (r4 !== null){ if (r4) render(); return; }
   switch (a){
-    case 'tab': if (UI.tab === 'est' && el.dataset.id === 'est'){ UI.curso = null; UI.aula = null; UI.tecAll = false; } UI.tab = el.dataset.id; UI.justify = null; UI.open = null; UI.play = null; scrollTo(0,0); render(); break;
+    case 'tab': if (UI.tab === 'est' && el.dataset.id === 'est'){ UI.curso = null; UI.aula = null; UI.tecAll = false; UI.tema = null; UI.inst = null; } UI.tab = el.dataset.id; UI.justify = null; UI.open = null; UI.play = null; scrollTo(0,0); render(); break;
     case 'mais': UI.mais = el.dataset.v; UI.open = null; render(); break;
     case 'tmonth': UI.tmonth = clamp(UI.tmonth + +el.dataset.d, 0, 11); UI.open = null; render(); break;
     case 'tec-copy': navigator.clipboard?.writeText(monthText(UI.tmonth)).then(() => toast('Mês copiado'), () => toast('Não consegui copiar')); break;
@@ -2470,6 +2637,7 @@ function saveSummary(){
 }
 document.addEventListener('input', ev => {
   const el = ev.target;
+  if (p4Input(el)) return;
   if (p2Input(el)) return;
   if (p1Input(el)) return;
   if (el.id === 'sumIn'){ clearTimeout(saveSummary.t); saveSummary.t = setTimeout(saveSummary, 900); }
